@@ -4,5 +4,6 @@ services:
   web: 
     build: .
     ports:
-      - 81:80
-      
+      - 80:80
+    volumes:
+      - /var/log/app:/var/log/supervisor
