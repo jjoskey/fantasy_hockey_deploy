@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <div class="container">
+
+        <h1>Это страница для заморозки и подсчёта очков.</h1>
+        <p>Кстати, она доступна только администраторам. Любое нажатие кнопок может привести к фатальным последствиям.</p>
+        <hr>
+        <button id="freeze_time" type="button" class="btn btn-primary hide">Остановить Freeze</button>
+        <button id="freeze_is_coming" type="button" class="btn btn-primary hide">Начать Freeze</button>
+        <p id="freeze_message"></p>
+        <hr>
+        <div class="row">
+            <div class="d-inline-flex">
+                <div class="p-2">
+                    <button id="count_button" type="button" class="btn btn-success">Посчитать очки</button>
+                </div>
+                <div class="p-2">
+                    <input id="tour_input" type="text" class="form-control" placeholder="Номер тура">
+                </div>
+            </div>
+        </div>
+        <p id="not_number" class="hide">В форме нужно ввести номер тура.</p>
+        <p>Здесь можно посчитать очки в туре. Просто укажите в форме номер тура и нажмите на кнопку.</p>
+        <hr>
+        <div class="row">
+            <div class="d-inline-flex">
+                <div class="p-2">
+                    <button id="add_transfers" type="button" class="btn btn-success">Добавить трансферы</button>
+                </div>
+                <div class="p-2">
+                    <input id="transfers_count" type="text" class="form-control" placeholder="Количество траснферов">
+                </div>
+            </div>
+        </div>
+        <p id="not_number_transfers" class="hide">В форме должно быть число.</p>
+        <p>Здесь можно добавить трансферы всем пользователям, кроме новых. Укажите количество, и они будут прибавлены к уже имеющимся у игрока трансферам.</p>
+        <hr>
+    </div>
+
+{% endblock %}
+{% block script %}
+{{ block.super }}
+
+    <script src="{% static 'script/freeze_and_count.js' %}"></script>
+
+{% endblock %}

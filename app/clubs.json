@@ -1,0 +1,1 @@
+[{"model": "players.club", "pk": 1, "fields": {"name": "\u0414\u0438\u043d\u0430\u043c\u043e"}}, {"model": "players.club", "pk": 2, "fields": {"name": "\u0421\u043f\u0430\u0440\u0442\u0430\u043a"}}, {"model": "players.club", "pk": 3, "fields": {"name": "\u0410\u043d\u0436\u0438"}}, {"model": "players.club", "pk": 4, "fields": {"name": "\u0419\u043e\u0443"}}]

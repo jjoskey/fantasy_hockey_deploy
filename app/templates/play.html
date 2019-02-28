@@ -1,0 +1,177 @@
+{% extends "base.html" %} {% load staticfiles %} {% block content %}
+<div class="container">
+    <div class="row play_page_row">
+        <div class="col-12 col-lg-6" style="margin-bottom: 3%">
+            <div class="field_wrapper">
+                <img class="field" src="{% static 'images/play/field.png' %}" alt="field">
+                <div class="field_div">
+                    <div class="forward zone">
+                        <!--<div class="player">-->
+                        <!--<img class="player_image" src="{% static 'images/play/1_shirt_DS.png' %}" alt="player">-->
+                        <!--<p class="font-weight-light player_sign"><i class="hide fas fa-times"></i>Иванов</p>-->
+                        <!--</div>-->
+                        <!--<div class="player">-->
+                        <!--<img class="player_image" src="{% static 'images/play/2_shirt_DE.png' %}" alt="player">-->
+                        <!--<p class="font-weight-light player_sign"><i class="hide fas fa-times"></i>Петров</p>-->
+                        <!--</div>-->
+                        <!--<div class="player">-->
+                        <!--<img class="player_image" src="{% static 'images/play/3_shirt_DK.png' %}" alt="player">-->
+                        <!--<p class="font-weight-light player_sign"><i class="hide fas fa-times"></i>Сидоров</p>-->
+                        <!--</div>-->
+                    </div>
+                    <div class="midfielder zone">
+                        <!--<div class="player">-->
+                        <!--<img class="player_image" src="{% static 'images/play/4_shirt_DCOP.png' %}" alt="player">-->
+                        <!--<p class="font-weight-light player_sign"><i class="hide fas fa-times"></i>Сивопляс</p>-->
+                        <!--</div>-->
+                        <!--<div class="player">-->
+                        <!--<img class="player_image" src="{% static 'images/play/5_shirt_SPB.png' %}" alt="player">-->
+                        <!--<p class="font-weight-light player_sign"><i class="hide fas fa-times"></i>Сидоров</p>-->
+                        <!--</div>-->
+                        <!--<div class="player">-->
+                        <!--<img class="player_image" src="{% static 'images/play/6_shirt_TANA.png' %}" alt="player">-->
+                        <!--<p class="font-weight-light player_sign"><i class="hide fas fa-times"></i>Петров</p>-->
+                        <!--</div>-->
+                        <!--<div class="player">-->
+                        <!--<img class="player_image" src="{% static 'images/play/3_shirt_DK.png' %}" alt="player">-->
+                        <!--<p class="font-weight-light player_sign"><i class="hide fas fa-times"></i>Петров</p>-->
+                        <!--</div>-->
+                    </div>
+                    <div class="defender zone">
+                        <!--<div class="player">-->
+                        <!--<img class="player_image" src="{% static 'images/play/4_shirt_DCOP.png' %}" alt="player">-->
+                        <!--<p class="font-weight-light player_sign"><i class="hide fas fa-times"></i>Иванов</p>-->
+                        <!--</div>-->
+                        <!--<div class="player">-->
+                        <!--<img class="player_image" src="{% static 'images/play/5_shirt_SPB.png' %}" alt="player">-->
+                        <!--<p class="font-weight-light player_sign"><i class="hide fas fa-times"></i>Петров</p>-->
+                        <!--</div>-->
+                        <!--<div class="player">-->
+                        <!--<img class="player_image" src="{% static 'images/play/1_shirt_DS.png' %}" alt="player">-->
+                        <!--<p class="font-weight-light player_sign"><i class="hide fas fa-times"></i>Сивопляс</p>-->
+                        <!--</div>-->
+                    </div>
+                    <div class="goalkeeper zone">
+                        <!--<div class="player">-->
+                        <!--<img class="player_image" src="{% static 'images/play/5_shirt_SPB.png' %}" alt="player">-->
+                        <!--<p class="font-weight-light player_sign"><i class="hide fas fa-times"></i>Сивопляс</p>-->
+                        <!--</div>-->
+                    </div>
+                    <div class="buttons">
+                        <button type="button" id="save_team" class="btn btn-primary btn-sm" disabled>Сохранить</button>
+                        <button type="button" id="cancel_transfers" class="btn btn-secondary hide btn-sm">Отменить замены</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-lg-6 div-players-list">
+            <div class="input-group-div">
+                <div>
+                    <h5>Здесь вы можете выбрать игроков для своей команды</h5>
+                </div>
+
+                <div class="input-group mb-3">
+                    <select class="custom-select" id="selectClub">
+                        <!--<option selected>Клуб</option>-->
+                        <option value="Динамо-Строитель">Динамо-Строитель</option>
+                        <option value="Динамо-Электросталь">Динамо-Электросталь</option>
+                        <option value="Динамо-Казань">Динамо-Казань</option>
+                        <option value="Динамо-ЦОП">Динамо-ЦОП</option>
+                        <option value="Тана">Тана</option>
+                        <option value="СПБ УОР2">СПБ УОР2</option>
+                        <option value="Волна">Волна</option>
+                    </select>
+                    <select class="custom-select" id="selectPosition">
+                        <option selected>Все позиции</option>
+                        <option value="GK">Вратари</option>
+                        <option value="DE">Защитники</option>
+                        <option value="MF">Полузащитники</option>
+                        <option value="FW">Нападающие</option>
+                    </select>
+                </div>
+            </div>
+            <table class="table table_players_all">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 33.34%">Фамилия</th>
+                        <th scope="col" style="width: 16.66%; padding-left: 0%;" class="cell_centerize">Позиция</th>
+                        <th scope="col" style="width: 16.66%" class="cell_centerize">Цена</th>
+                        <th scope="col" style="width: 33.34%">Клуб</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody-all-players">
+
+                </tbody>
+            </table>
+
+            <div class="users-players-div">
+                <h5>Здесь вы можете выбрать капитана своей команды</h5>
+                <table class="table users_players">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 33.34%">Фамилия</th>
+                            <th scope="col" style="width: 16.66%; padding-left: 0%;" class="cell_centerize">Позиция</th>
+                            <th scope="col" style="width: 33.34%">Клуб</th>
+                            <th scope="col" style="width: 16.66%" class="cell_centerize">Капитан</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-users-players">
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <p id="budget"></p>
+                </div>
+                <div class="col-6">
+                    <p id="changes"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 hide">
+                    <p id="tour"></p>
+                </div>
+                <div class="col-6 hide">
+                    <p id="tour_name"></p>
+                </div>
+                <div class="col-6 hide">
+                    <p id="deadline"></p>
+                </div>
+                <div class="col-6 hide">
+                    <p id="deadline_end"></p>
+                </div>
+            </div>
+            <!--<ul class="players-list">-->
+            <div class="row button-captain-div captain-players-button hide">
+                <div class="col-12 col-sm-6">
+                    <button type="button" id="button-captain" class="btn btn-primary">Сменить капитана</button>
+                </div>
+            </div>
+            <div class="row button-to-players-div captain-players-button hide">
+                <div class="col-12 col-sm-6">
+                    <button type="button" id="button-to-players" class="btn btn-primary">К игрокам</button>
+                </div>
+            </div>
+
+            <!--</ul>-->
+        </div>
+    </div>
+
+
+    <!--<p>My players</p>-->
+    <!--<ul class="my-players">-->
+
+    <!--</ul>-->
+
+</div>
+
+
+{% endblock %} {% block script %} {{ block.super }}
+
+<script src="{% static 'script/play_script.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Войдите. Если ещё не зарегистрировались: <a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">Зарегистрироваться</a></h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input type="submit" value="Login" class="btn btn-default">
+    </form>
+</div>
+
+{% endblock %}
