@@ -6,4 +6,5 @@ services:
     ports:
       - 80:80
     volumes:
-      /var/log/app:/var/log/supervisor
+      - /var/log/app:/var/log/supervisor
+
