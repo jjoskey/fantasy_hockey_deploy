@@ -48,18 +48,18 @@ const addTransfers = $('#add_transfers');
 fetchFreeze().then( data => showButton(data));
 
 freezeTimeButton.click(() => {
-    let now = new Date();
+//    let now = new Date();
     let message = 'Finish freeze time';
-    let dataToSend = {'message': message, 'time': now};
+    let dataToSend = {'message': message};
     fetch('/api_freeze_and_count/receive_freeze_data/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(dataToSend) })
     .then(fetchFreeze).then( data => showButton(data));
 })
 
 freezeComingButton.click(() => {
     freezeComingButton.attr('disabled', true);
-    let now = new Date();
+//    let now = new Date();
     let message = 'Start freeze time';
-    let dataToSend = {'message': message, 'time': now};
+    let dataToSend = {'message': message};
     fetch('/api_freeze_and_count/receive_freeze_data/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(dataToSend) })
     .then(fetchFreeze).then( data => {
         freezeComingButton.removeAttr('disabled');
