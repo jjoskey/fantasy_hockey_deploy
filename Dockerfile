@@ -49,6 +49,8 @@ COPY . /home/docker/code/
 
 ENV STATIC_ROOT=/home/docker/code/app/static
 #RUN django-admin collectstatic
+RUN cd /home/docker/code/app && python3.6 manage.py collectstatic --clear  --noinput
+
 
 EXPOSE 80
 CMD ["supervisord", "-n"]
