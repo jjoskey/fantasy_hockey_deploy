@@ -41,7 +41,7 @@ function renderAllPlayers(data) {
 
         if (!tableBody.children().length) {
             data.all_players.forEach(function(element) {
-                const tr = $(`<tr class="player_row"><td>${element.fields.surname}</td><td class="cell_centerize">${element.fields.position}</td><td class="cell_centerize">${element.fields.price}</td><td>${element.fields.club}</td></tr>`);
+                const tr = $(`<tr class="player_row"><td>${element.fields.surname} ${element.fields.name}</td><td class="cell_centerize">${element.fields.position}</td><td class="cell_centerize">${element.fields.price}</td><td>${element.fields.club}</td></tr>`);
                 tr.attr('data-player-id', element.id);
                 disablation(element.disable, element.message, tr);
                 tableBody.append(tr);
@@ -116,7 +116,7 @@ function chooseCaptain(data) {
                 } else {
                     captain = '';
                 }
-                const tr = $(`<tr class="users_player_row"><td>${element.fields.surname}</td><td class="cell_centerize">${element.fields.position}</td><td>${element.fields.club}</td><td class="cell_centerize">${captain}</td></tr>`);
+                const tr = $(`<tr class="users_player_row"><td>${element.fields.surname} ${element.fields.name}</td><td class="cell_centerize">${element.fields.position}</td><td>${element.fields.club}</td><td class="cell_centerize">${captain}</td></tr>`);
                 tr.attr('data-player-id', element.id);
                 tableBody.append(tr);
 
