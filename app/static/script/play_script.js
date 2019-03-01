@@ -384,6 +384,7 @@ function hidingElementsForCaptainChoosing(data) {
 
 
 $('#save_team').click( () => {
+    $('#save_team').attr('disabled', true)
     fetch('/api_players/save_team/', { method: 'POST' })
     .then(fetchAllPlayers)
     .then( data => {
@@ -393,11 +394,13 @@ $('#save_team').click( () => {
 
 
 $('#cancel_transfers').click( () => {
+    $(this).attr('disabled', true);
     fetch('/api_players/cancel_transfers/', { method: 'POST' })
     .then(fetchAllPlayers)
     .then( data => {
         useRecievedData(data);
     })
+    $(this).removeAttr('disabled');
 })
 
 

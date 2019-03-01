@@ -56,19 +56,25 @@ freezeTimeButton.click(() => {
 })
 
 freezeComingButton.click(() => {
+    freezeComingButton.attr('disabled', true);
     let now = new Date();
     let message = 'Start freeze time';
     let dataToSend = {'message': message, 'time': now};
     fetch('/api_freeze_and_count/receive_freeze_data/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(dataToSend) })
-    .then(fetchFreeze).then( data => showButton(data));
+    .then(fetchFreeze).then( data => {
+        freezeComingButton.removeAttr('disabled');
+        showButton(data);
+    })
 })
 
 
 countButton.click(() => {
+
     $('#not_number').addClass('hide');
     const tour = $('#tour_input').val();
     $('#tour_input').val(null);
     if (Number(tour)) {
+        countButton.attr('disabled', true);
         let now = new Date();
         fetch('/api_freeze_and_count/count_and_save_points/', { method: 'POST', headers: {
             'Content-type': 'application/json' },
@@ -77,10 +83,12 @@ countButton.click(() => {
         .then(response => response.json())
         .then(data => {
             console.log(data);
+            countButton.removeAttr('disabled');
         })
     } else {
         $('#not_number').removeClass('hide');
     }
+
 //    console.log(tour);
 })
 
@@ -89,9 +97,14 @@ addTransfers.click(() => {
     const transfers = $('#transfers_count').val();
     $('#transfers_count').val(null);
     if (Number(transfers)) {
+        addTransfers.attr('disabled', true);
         fetch('/api_freeze_and_count/add_changes_to_all_profile/', { method: 'POST', headers: {
             'Content-type': 'application/json' },
             body: JSON.stringify(Number(transfers))
+        })
+        .then(data =>{
+            addTransfers.removeAttr('disabled');
+            console.log('yes');
         })
     } else {
         $('#not_number_transfers').removeClass('hide');
