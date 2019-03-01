@@ -7,3 +7,4 @@ services:
       - 80:80
     volumes:
       - /var/log/app:/var/log/supervisor
+      - /var/log/app/nginx:/var/log/nginx
