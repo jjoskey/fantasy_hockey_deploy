@@ -2,10 +2,12 @@ from django.views.generic import TemplateView
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from players.models import Player
+# from players.models import Player
+from accounts.models import Profile
 import json
 from django.http import JsonResponse
 from django.core import serializers
+from django.shortcuts import render
 
 
 class LoggedinPage(TemplateView):
@@ -31,4 +33,7 @@ class PlayPage(TemplateView):
     #
     #     return context
 
-
+def render_leaders(request):
+    users = Profile.objects.filter(points__gt=0)
+    print(users)
+    return render(request, 'leaders.html', context={'users': users})
