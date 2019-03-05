@@ -4,11 +4,14 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 # from players.models import Player
 from accounts.models import Profile
+from players.models import Team
+# from players import views as players_views
+# from players.views import *
 import json
 from django.http import JsonResponse
 from django.core import serializers
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 
 
 class LoggedinPage(TemplateView):
@@ -51,6 +54,18 @@ def render_leaders(request):
 
     return render(request, 'leaders.html', context={'users': users, 'position': position})
 
+
 def render_user_team(request, user_id):
-    print(user_id)
-    return HttpResponse(f'<p>{user_id}</p>')
+    profile = Profile.objects.get(pk=user_id)
+    team = Team.objects.filter(user_id=profile, tour_number_end__isnull=True)
+    team_dict = {'GK': [], 'DE': [], 'MF': [], 'FW': []}
+
+    if len(team) == 11:
+        for instance in team:
+            team_dict[instance.player_id.position].append(instance)
+        print(team_dict)
+        print(profile.user_id.username)
+        print(profile.points)
+        return render(request, 'users_team.html', context={'team': team_dict, 'name': profile.user_id.username, 'points': profile.points})
+    else:
+        return HttpResponseNotFound(f'<h1>У такого пользователя нет команды, или что-то пошло не так...</h1>')
