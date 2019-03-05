@@ -8,6 +8,7 @@ import json
 from django.http import JsonResponse
 from django.core import serializers
 from django.shortcuts import render
+from django.http import HttpResponse
 
 
 class LoggedinPage(TemplateView):
@@ -49,3 +50,7 @@ def render_leaders(request):
     print(position)
 
     return render(request, 'leaders.html', context={'users': users, 'position': position})
+
+def render_user_team(request, user_id):
+    print(user_id)
+    return HttpResponse(f'<p>{user_id}</p>')
