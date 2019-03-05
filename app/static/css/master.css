@@ -116,7 +116,7 @@ p {
         table-layout: fixed;
     }
 
-    .position-in-leaders {
+    .position-in-leaders, .not-users-in-leaders {
         font-size: 0.75rem;
     }
 
@@ -328,4 +328,5 @@ h5 {
 
 .position-in-leaders {
     text-align: right;
+    margin-top: 3%;
 }

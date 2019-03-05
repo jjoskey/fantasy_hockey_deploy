@@ -3,7 +3,9 @@
 {% load staticfiles%}
 
 <div class="container">
-
+{% if not users %}
+    <p class="not-users-in-leaders">Лидеры появятся после 1-го тура.</p>
+{% else %}
 <table class="table table-leaders">
     <thead>
         <tr>
@@ -17,20 +19,30 @@
         {% if position %}
         <p class="position-in-leaders">Вы на {{ position }} месте</p>
         {% endif %}
+
         {% for user in users %}
-            <tr class="user_row" data-user-id="{{ user.pk }}">
 
-                <td class="cell_centerize">{{ forloop.counter }}</td>
-                <td>{{ user.user_id.username }}</td>
-                <td>{{ user.team_name }}</td>
-                <td class="cell_centerize">{{ user.points }}</td>
+                <tr class="user_row" data-user-id="{{ user.pk }}">
 
-            </tr>
+                    <td class="cell_centerize">{{ forloop.counter }}</td>
+                    <td>{{ user.user_id.username }}</td>
+                    <td>{{ user.team_name }}</td>
+                    <td class="cell_centerize">{{ user.points }}</td>
+
+                </tr>
+
         {% endfor %}
+
+
     </tbody>
 </table>
 
+{% endif %}
 </div>
+{% endblock %}
+{% block script %}
+{{ block.super }}
+
+<script src="{% static 'script/leaders.js' %}"></script>
 
 {% endblock %}
-
