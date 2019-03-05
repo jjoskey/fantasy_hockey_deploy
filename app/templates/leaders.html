@@ -4,7 +4,28 @@
 
 <div class="container">
 
+<table class="table table-leaders">
+    <thead>
+        <tr>
+            <th scope="col" class="cell_centerize">Место</th>
+            <th scope="col">Пользователь</th>
+            <th scope="col">Команда</th>
+            <th scope="col" class="cell_centerize">Очки</th>
+        </tr>
+    </thead>
+    <tbody class="tbody-leaders">
+        {% for user in users %}
+            <tr class="user_row" data-user-id="{{ user.pk }}">
 
+                <td class="cell_centerize">{{ forloop.counter }}</td>
+                <td>{{ user.user_id.username }}</td>
+                <td>{{ user.team_name }}</td>
+                <td class="cell_centerize">{{ user.points }}</td>
+
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 </div>
 

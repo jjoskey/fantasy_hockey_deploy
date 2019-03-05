@@ -34,6 +34,18 @@ class PlayPage(TemplateView):
     #     return context
 
 def render_leaders(request):
-    users = Profile.objects.filter(points__gt=0)
-    print(users)
-    return render(request, 'leaders.html', context={'users': users})
+    users = Profile.objects.filter(points__gt=0).order_by('-points')
+    position = False
+    # print(type(users))
+    if request.user.is_authenticated(): # and current_profile in users:
+        current_profile = Profile.objects.get(user_id=request.user)
+
+        if current_profile in users:
+            position = list(users).index(current_profile) + 1
+
+    if len(users) > 100:
+        users = users[:100]
+    # print(type(users))
+    print(position)
+
+    return render(request, 'leaders.html', context={'users': users, 'position': position})

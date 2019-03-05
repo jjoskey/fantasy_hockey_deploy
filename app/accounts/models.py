@@ -21,7 +21,7 @@ class Profile(models.Model):
     budget = models.FloatField(default=DEFAULT_BUDGET)
     changes_count = models.PositiveIntegerField(default=0)
     refresh_changes = models.BooleanField(editable=False, default=False)
-    points = models.PositiveIntegerField(editable=False, default=0, blank=False, null=False)
+    points = models.PositiveIntegerField(default=0, blank=False, null=False)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):

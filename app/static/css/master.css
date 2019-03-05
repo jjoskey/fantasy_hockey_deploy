@@ -107,6 +107,16 @@ p {
     h2 {
         font-size: 23px;
     }
+
+    .table-leaders {
+        font-size: 0.75rem;
+        font-weight: 100;
+        line-height: 0.4;
+        white-space: nowrap;
+        table-layout: fixed;
+    }
+
+
 }
 
 .field {
@@ -239,7 +249,7 @@ p {
     background-color: #fff !important;
 }
 
-.player_row:hover, .users_player_row:hover {
+.player_row:hover, .users_player_row:hover, .user_row:hover {
     background-color: gray;
 }
 
@@ -247,7 +257,7 @@ tbody tr {
     cursor: pointer;
 }
 
-.table_players_all td, .users_players td {
+.table_players_all td, .users_players td, .table-leaders th, .table-leaders th {
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -307,4 +317,8 @@ tbody tr {
 
 h5 {
     color: #747474;
+}
+
+.table-leaders {
+    margin-top: 3%;
 }
