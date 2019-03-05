@@ -116,6 +116,9 @@ p {
         table-layout: fixed;
     }
 
+    .position-in-leaders {
+        font-size: 0.75rem;
+    }
 
 }
 
@@ -321,4 +324,8 @@ h5 {
 
 .table-leaders {
     margin-top: 3%;
+}
+
+.position-in-leaders {
+    text-align: right;
 }
