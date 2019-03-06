@@ -336,6 +336,26 @@ h5 {
 }
 
 .game {
-    margin-top: 3%;
-    margin-bottom: 3%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    color: gray;
+}
+
+.scores  {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.bullitts {
+    font-size: 14px;
+    line-height: 1;
+}
+
+.zero-score {
+    font-weight: normal;
+}
+
+.team_names {
+    line-height: 1;
 }

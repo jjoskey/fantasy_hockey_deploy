@@ -72,6 +72,7 @@ class Game(models.Model):
     guest_team = models.ForeignKey(Club, related_name='Guest')
     score = models.CharField(validators=[validate_comma_separated_integer_list], max_length=5, null=True, blank=True)
     bullitt_winner = models.ForeignKey(Club, related_name='Bullitt_Winner', null=True, blank=True)
+    start_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True)
 
     def __str__(self):
         return 'тур ' + str(self.tour_number) + ', игра: ' + str(self.game_of_tour) + ', ' + self.home_team.name + ' - ' + self.guest_team.name

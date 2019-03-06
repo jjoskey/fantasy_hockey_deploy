@@ -1,6 +1,11 @@
 {% extends "base.html" %}
+
 {% block content %}
 {% load staticfiles%}
+{% load tz %}
+
+
+
 
     <div class="container">
         <div class="row align-items-center">
@@ -17,7 +22,9 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-6 games current_tour">
+            <div class="col-12 col-md-6 games current_tour text-align-center">
+            {% localtime on %}
+            {% if ct_games %}
                 {% for game in ct_games %}
                     <div class="game">
                         {% if game.score %}
@@ -28,14 +35,17 @@
                             {% endif %}
                             <div class="scores">{{ game.split_score_in_template.0 }}:{{ game.split_score_in_template.1 }}</div>
                             {% if game.bullitt_winner %}
-                                <div class="bullits">Победитель по буллитам: <b>{{ game.bullitt_winner }}</b></div>
+                                <div class="bullitts">Победитель по буллитам: <b>{{ game.bullitt_winner }}</b></div>
                             {% endif %}
                         {% else %}
                             <div class="team_names">{{ game.home_team }} — {{ game.guest_team }}</div>
-                            <div class="scores">–:–</div>
+                            <div class="scores zero-score">–:–</div>
+                            <div class="start_time">Начало: {{ game.start_time|date:"j b., G:i" }}</div>
                         {% endif %}
                     </div>
                 {% endfor %}
+            {% endif %}
+            {% endlocaltime %}
             </div>
             <div class="col-12 col-md-6 games previous_tour">
                 {{ pt_games }}
