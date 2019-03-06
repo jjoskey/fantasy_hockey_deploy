@@ -20,7 +20,7 @@ from freeze_and_count.views import render_freeze_and_count
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.HomePage.as_view(), name='home'),
+    url(r'^$', views.render_home_page, name='home'),
     url(r"^accounts/", include("accounts.urls", namespace="accounts")),
     url(r"^accounts/", include("django.contrib.auth.urls")),
     url(r"^loggedin/$", views.LoggedinPage.as_view(), name="loggedin"),

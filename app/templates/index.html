@@ -15,6 +15,30 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 games">
+                {% for game in ct_games %}
+                    {% if game.score %}
+                        {% if game.home_team == game.winner %}
+                            <div class="team_names"><b>{{ game.home_team }}</b> — {{ game.guest_team }}</div>
+                        {% else %}
+                            <div class="team_names">{{ game.home_team }} — <b>{{ game.guest_team }}</b></div>
+                        {% endif %}
+                        <div class="scores">{{ game.split_score_in_template.0 }}:{{ game.split_score_in_template.1 }}</div>
+                        {% if game.bullitt_winner %}
+                            <div class="bullits">Победитель по буллитам: <b>{{ game.bullitt_winner }}</b></div>
+                        {% endif %}
+                    {% else %}
+                        <div class="scores">–:–</div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-12 col-md-6 games">
+                {{ pt_games }}
+            </div>
+        </div>
+    </div>
 
 
 {% endblock %}

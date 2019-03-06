@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 # from players.models import Player
 from accounts.models import Profile
-from players.models import Team
+from players.models import Team, Game
 # from players import views as players_views
 # from players.views import *
 import json
@@ -12,6 +12,7 @@ from django.http import JsonResponse
 from django.core import serializers
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
+from freeze_and_count import views as freeze_and_count
 
 
 class LoggedinPage(TemplateView):
@@ -22,8 +23,11 @@ class ThanksPage(TemplateView):
     template_name = 'thanks.html'
 
 
-class HomePage(TemplateView):
-    template_name = "index.html"
+# class HomePage(TemplateView):
+#     template_name = "index.html"
+
+
+
 
 
 class PlayPage(TemplateView):
@@ -83,10 +87,26 @@ def render_user_team(request, user_id):
         for instance in team_instances:
             instance.player_id.tshirt = choose_tshirt(instance.player_id)
             team[instance.player_id.position].append(instance.player_id)
-        print(team)
-        print(profile.user_id.username)
-        print(profile.points)
+        # print(team)
+        # print(profile.user_id.username)
+        # print(profile.points)
 
         return render(request, 'users_team.html', context={'team': team, 'name': profile.team_name, 'points': profile.points})
     else:
         return HttpResponseNotFound(f'<h1>У такого пользователя нет команды, или что-то пошло не так...</h1>')
+
+
+def render_home_page(request):
+
+    current_tour = freeze_and_count.get_current_tour()
+    previous_tour = freeze_and_count.get_previous_tour()
+    ct_games = Game.objects.filter(tour_number=current_tour)
+    pt_games = False
+
+    if previous_tour == 'Previous tour is not exist':
+        previous_tour = False
+
+    if previous_tour:
+        pt_games = Game.objects.filter(tour_number=previous_tour)
+
+    return render(request, 'index.html', context={'ct_games': ct_games, 'pt_games': pt_games, 'current_tour': current_tour, 'previous_tour': previous_tour})

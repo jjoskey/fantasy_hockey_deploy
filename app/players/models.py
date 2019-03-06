@@ -70,12 +70,23 @@ class Game(models.Model):
     game_of_tour = models.PositiveSmallIntegerField(null=False, blank=False)
     home_team = models.ForeignKey(Club, related_name='Home')
     guest_team = models.ForeignKey(Club, related_name='Guest')
-    score = models.CharField(validators=[validate_comma_separated_integer_list], max_length=5)
+    score = models.CharField(validators=[validate_comma_separated_integer_list], max_length=5, null=True, blank=True)
     bullitt_winner = models.ForeignKey(Club, related_name='Bullitt_Winner', null=True, blank=True)
 
     def __str__(self):
         return 'тур ' + str(self.tour_number) + ', игра: ' + str(self.game_of_tour) + ', ' + self.home_team.name + ' - ' + self.guest_team.name
 
+    def split_score_in_template(self):
+        return self.score.split(',')
+
+    def winner(self):
+        scores = list(map(int, self.score.split(',')))
+        if scores[0] > scores[1]:
+            return self.home_team
+        elif scores[0] < scores[1]:
+            return self.guest_team
+        else:
+            return self.bullitt_winner
 
     class Meta:
         unique_together = ['tour_number', 'game_of_tour', 'home_team', 'guest_team']
