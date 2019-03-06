@@ -7,7 +7,7 @@ var myPlayers = new Object;
 var fieldDisable, dataGlobal;
 
 async function fetchAllPlayers() { // достает всех игроков из базы данных
-    return fetch('/api_players/send_players_list/', { method: 'GET', headers: { 'Content-type': 'application/json' } })
+    return fetch('/api_players/send_players_list/', {method: 'GET', headers: { 'Content-type': 'application/json' }, credentials: 'same-origin'})
         .then(response => response.json())
         .then(data => {
             dataGlobal = data;
@@ -63,7 +63,7 @@ function renderAllPlayers(data) {
                 e.target.parentElement.classList.add('players-tr-disabled');
                 const playerId = event.target.parentElement.getAttribute('data-player-id');
                 console.log(playerId);
-                fetch('/api_players/receive_player_id_to_add/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(playerId) })
+                fetch('/api_players/receive_player_id_to_add/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(playerId), credentials: 'same-origin' })
                .then(fetchAllPlayers)
                .then(data => {
                    useRecievedData(data);
@@ -128,7 +128,7 @@ function chooseCaptain(data) {
 
                 const playerId = event.target.parentElement.getAttribute('data-player-id');
                 console.log(playerId);
-                fetch('/api_players/receive_captains_id/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(playerId) })
+                fetch('/api_players/receive_captains_id/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(playerId), credentials: 'same-origin' })
                .then(fetchAllPlayers)
                .then(data => {
                    useRecievedData(data);
@@ -229,7 +229,7 @@ function renderMyPlayers(data) {
 
                 if (e.target.tagName === 'IMG' || e.target.tagName === 'P' || e.target.tagName === 'I') {
 //                    console.log('YES!')
-                    fetch('/api_players/receive_player_id_to_unactivate/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(element.id) })
+                    fetch('/api_players/receive_player_id_to_unactivate/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(element.id), credentials: 'same-origin' })
                     .then(fetchAllPlayers)
                     .then( data => {
                         useRecievedData(data);
@@ -385,7 +385,7 @@ function hidingElementsForCaptainChoosing(data) {
 
 $('#save_team').click( () => {
     $('#save_team').attr('disabled', true)
-    fetch('/api_players/save_team/', { method: 'POST' })
+    fetch('/api_players/save_team/', { method: 'POST', credentials: 'same-origin' })
     .then(fetchAllPlayers)
     .then( data => {
         useRecievedData(data);
@@ -395,7 +395,7 @@ $('#save_team').click( () => {
 
 $('#cancel_transfers').click( () => {
     $(this).attr('disabled', true);
-    fetch('/api_players/cancel_transfers/', { method: 'POST' })
+    fetch('/api_players/cancel_transfers/', { method: 'POST' , credentials: 'same-origin'})
     .then(fetchAllPlayers)
     .then( data => {
         useRecievedData(data);

@@ -1,7 +1,7 @@
 (function (global) {
 
 async function fetchFreeze() {
-    return fetch('/api_freeze_and_count/send_last_freeze/', { method: 'GET', headers: { 'Content-Type': 'application/json' } })
+    return fetch('/api_freeze_and_count/send_last_freeze/', { method: 'GET', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin' })
         .then(response => response.json())
 }
 
@@ -51,7 +51,7 @@ freezeTimeButton.click(() => {
 //    let now = new Date();
     let message = 'Finish freeze time';
     let dataToSend = {'message': message};
-    fetch('/api_freeze_and_count/receive_freeze_data/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(dataToSend) })
+    fetch('/api_freeze_and_count/receive_freeze_data/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(dataToSend), credentials: 'same-origin' })
     .then(fetchFreeze).then( data => showButton(data));
 })
 
@@ -60,7 +60,7 @@ freezeComingButton.click(() => {
 //    let now = new Date();
     let message = 'Start freeze time';
     let dataToSend = {'message': message};
-    fetch('/api_freeze_and_count/receive_freeze_data/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(dataToSend) })
+    fetch('/api_freeze_and_count/receive_freeze_data/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(dataToSend), credentials: 'same-origin' })
     .then(fetchFreeze).then( data => {
         freezeComingButton.removeAttr('disabled');
         showButton(data);
@@ -78,7 +78,8 @@ countButton.click(() => {
         let now = new Date();
         fetch('/api_freeze_and_count/count_and_save_points/', { method: 'POST', headers: {
             'Content-type': 'application/json' },
-            body: JSON.stringify(Number(tour))
+            body: JSON.stringify(Number(tour)),
+            credentials: 'same-origin'
         })
         .then(response => response.json())
         .then(data => {
@@ -100,7 +101,8 @@ addTransfers.click(() => {
         addTransfers.attr('disabled', true);
         fetch('/api_freeze_and_count/add_changes_to_all_profile/', { method: 'POST', headers: {
             'Content-type': 'application/json' },
-            body: JSON.stringify(Number(transfers))
+            body: JSON.stringify(Number(transfers)),
+            credentials: 'same-origin'
         })
         .then(data =>{
             addTransfers.removeAttr('disabled');
