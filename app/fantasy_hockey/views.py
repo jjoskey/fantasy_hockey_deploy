@@ -40,32 +40,53 @@ class PlayPage(TemplateView):
 def render_leaders(request):
     users = Profile.objects.filter(points__gt=0).order_by('-points')
     position = False
+    points = False
     # print(type(users))
     if request.user.is_authenticated(): # and current_profile in users:
         current_profile = Profile.objects.get(user_id=request.user)
 
         if current_profile in users:
             position = list(users).index(current_profile) + 1
+            points = current_profile.points
 
     if len(users) > 100:
         users = users[:100]
     # print(type(users))
-    print(position)
+    # print(position)
 
-    return render(request, 'leaders.html', context={'users': users, 'position': position})
+    return render(request, 'leaders.html', context={'users': users, 'position': position, 'points': points})
+
+
+def choose_tshirt(player_id):
+    if player_id.club.name == 'Динамо-Строитель':
+        return 'images/play/1_shirt_DS.png'
+    elif player_id.club.name == 'Динамо-Электросталь':
+        return 'images/play/2_shirt_DE.png'
+    elif player_id.club.name == 'Динамо-Казань':
+        return 'images/play/3_shirt_DK.png'
+    elif player_id.club.name == 'Динамо-ЦОП':
+        return 'images/play/4_shirt_DCOP.png'
+    elif player_id.club.name == 'Тана':
+        return 'images/play/6_shirt_TANA.png'
+    elif player_id.club.name == 'СПБ УОР2':
+        return 'images/play/5_shirt_SPB.png'
+    elif player_id.club.name == 'Волна':
+        return 'images/play/7_shirt_VOLNA.png'
 
 
 def render_user_team(request, user_id):
     profile = Profile.objects.get(pk=user_id)
-    team = Team.objects.filter(user_id=profile, tour_number_end__isnull=True)
-    team_dict = {'GK': [], 'DE': [], 'MF': [], 'FW': []}
+    team_instances = Team.objects.filter(user_id=profile, tour_number_end__isnull=True)
+    team = {'GK': [], 'DE': [], 'MF': [], 'FW': []}
 
-    if len(team) == 11:
-        for instance in team:
-            team_dict[instance.player_id.position].append(instance)
-        print(team_dict)
+    if len(team_instances) == 11:
+        for instance in team_instances:
+            instance.player_id.tshirt = choose_tshirt(instance.player_id)
+            team[instance.player_id.position].append(instance.player_id)
+        print(team)
         print(profile.user_id.username)
         print(profile.points)
-        return render(request, 'users_team.html', context={'team': team_dict, 'name': profile.user_id.username, 'points': profile.points})
+
+        return render(request, 'users_team.html', context={'team': team, 'name': profile.team_name, 'points': profile.points})
     else:
         return HttpResponseNotFound(f'<h1>У такого пользователя нет команды, или что-то пошло не так...</h1>')

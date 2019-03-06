@@ -4,7 +4,7 @@
 
 <div class="container">
 {% if not users %}
-    <p class="not-users-in-leaders">Лидеры появятся после 1-го тура.</p>
+    <p class="not-users-in-leaders">Лидеры появятся после окончания 1-го тура.</p>
 {% else %}
 <table class="table table-leaders">
     <thead>
@@ -17,7 +17,7 @@
     </thead>
     <tbody class="tbody-leaders">
         {% if position %}
-        <p class="position-in-leaders">Вы на {{ position }} месте</p>
+            <p class="position-in-leaders">Вы на {{ position }} месте с количеством очков: {{ points }}</p>
         {% endif %}
 
         {% for user in users %}
