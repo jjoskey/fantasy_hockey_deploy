@@ -10,7 +10,7 @@ from players.models import Team, Game
 import json
 from django.http import JsonResponse
 from django.core import serializers
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
 from freeze_and_count import views as freeze_and_count
 
@@ -30,16 +30,17 @@ class ThanksPage(TemplateView):
 
 
 
-class PlayPage(TemplateView):
+def render_play_page(request):
+    if request.user.is_authenticated():
+        current_profile = Profile.objects.get(user_id=request.user)
+        if current_profile.team_name:
+            return render(request, 'play.html')
+        else:
+            return redirect('accounts:teamname')
+    else:
+        return redirect('accounts:login')
 
-    template_name = "play.html"
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['players'] = serializers.serialize('json', Player.objects.all())
-    #     print(context['players'])
-    #
-    #     return context
 
 def render_leaders(request):
     users = Profile.objects.filter(points__gt=0).order_by('-points')
@@ -102,6 +103,9 @@ def render_home_page(request):
     previous_tour = freeze_and_count.get_previous_tour()
     ct_games = Game.objects.filter(tour_number=current_tour)
     pt_games = False
+
+    if not ct_games:
+        ct_games = False
 
     if previous_tour == 'Previous tour is not exist':
         previous_tour = False

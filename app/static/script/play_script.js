@@ -93,13 +93,13 @@ function showTourData(data) {
     if (data.tour_info.deadline) {
         let date = new Date(data.tour_info.deadline);
 //        console.log(date);
-        deadline.text(`Начало следующего дедлайна: ${date.toLocaleString('ru')}`);
+        deadline.text(`Начало следующего дедлайна: ${date.toLocaleString('ru', {day: '2-digit', month: '2-digit' ,hour: '2-digit', minute:'2-digit'})}`);
         deadline.parent().removeClass('hide');
     }
 
     if (data.tour_info.deadline_end) {
         let date = new Date(data.tour_info.deadline_end);
-        deadlineEnd.text(`Примерное время окончания дедлайна: ${date.toLocaleString('ru')}`);
+        deadlineEnd.text(`Примерное время окончания дедлайна: ${date.toLocaleString('ru', {day: '2-digit', month: '2-digit' ,hour: '2-digit', minute:'2-digit'})}`);
         deadlineEnd.parent().removeClass('hide');
     }
 
