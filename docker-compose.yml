@@ -8,3 +8,14 @@ services:
     volumes:
       - /var/log/app:/var/log/supervisor
       - /var/log/app/nginx:/var/log/nginx
+    restart: always
+    
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ohw2Eege
+    volumes:
+      - /var/log/app/mysql:/var/log/mysql
+      
