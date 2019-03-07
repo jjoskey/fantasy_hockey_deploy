@@ -103,6 +103,9 @@ def render_home_page(request):
     ct_games = Game.objects.filter(tour_number=current_tour)
     pt_games = False
 
+    if not ct_games:
+        ct_games = False
+
     if previous_tour == 'Previous tour is not exist':
         previous_tour = False
 

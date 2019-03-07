@@ -336,8 +336,8 @@ h5 {
 }
 
 .game {
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin-top: 7%;
+    margin-bottom: 7%;
     color: gray;
 }
 
@@ -347,7 +347,7 @@ h5 {
     line-height: 1;
 }
 
-.bullitts {
+.bullitts, .start_time {
     font-size: 14px;
     line-height: 1;
 }
@@ -358,4 +358,12 @@ h5 {
 
 .team_names {
     line-height: 1;
+}
+
+.current_tour h4, .previous_tour h4 {
+    color: gray;
+}
+
+.games {
+    margin-top: 5%;
 }

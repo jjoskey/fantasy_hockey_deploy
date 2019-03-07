@@ -2,7 +2,7 @@
 
 {% block content %}
 {% load staticfiles%}
-{% load tz %}
+
 
 
 
@@ -21,10 +21,15 @@
         </div>
     </div>
     <div class="container">
-        <div class="row">
+        <div class="row games-row">
             <div class="col-12 col-md-6 games current_tour text-align-center">
-            {% localtime on %}
+
             {% if ct_games %}
+                {% if current_tour.name %}
+                    <h4>Ближайший тур, {{ current_tour.name }}</h4>
+                {% else %}
+                    <h4>Ближайший тур, номер {{ current_tour.number }}</h4>
+                {% endif %}
                 {% for game in ct_games %}
                     <div class="game">
                         {% if game.score %}
@@ -40,18 +45,45 @@
                         {% else %}
                             <div class="team_names">{{ game.home_team }} — {{ game.guest_team }}</div>
                             <div class="scores zero-score">–:–</div>
-                            <div class="start_time">Начало: {{ game.start_time|date:"j b., G:i" }}</div>
+                            <div class="start_time">Начало: <span class="time" data-time="{{ game.start_time|date:"Y-m-d\TH:i:sO" }}"></span></div>
                         {% endif %}
                     </div>
                 {% endfor %}
             {% endif %}
-            {% endlocaltime %}
+
             </div>
-            <div class="col-12 col-md-6 games previous_tour">
-                {{ pt_games }}
+            <div class="col-12 col-md-6 games previous_tour text-align-center">
+            {% if pt_games %}
+                {% if previous_tour.name %}
+                    <h4>Предыдущий тур, {{ previous_tour.name }}</h4>
+                {% else %}
+                    <h4>Предыдущий тур, номер {{ previous_tour.number }}</h4>
+                {% endif %}
+                {% for game in pt_games %}
+                    <div class="game">
+
+                        {% if game.home_team == game.winner %}
+                            <div class="team_names"><b>{{ game.home_team }}</b> — {{ game.guest_team }}</div>
+                        {% else %}
+                            <div class="team_names">{{ game.home_team }} — <b>{{ game.guest_team }}</b></div>
+                        {% endif %}
+                        <div class="scores">{{ game.split_score_in_template.0 }}:{{ game.split_score_in_template.1 }}</div>
+                        {% if game.bullitt_winner %}
+                            <div class="bullitts">Победитель по буллитам: <b>{{ game.bullitt_winner }}</b></div>
+                        {% endif %}
+
+                    </div>
+                {% endfor %}
+            {% endif %}
             </div>
         </div>
     </div>
 
+
+{% endblock %}
+{% block script %}
+{{ block.super }}
+
+<script src="{% static 'script/index.js' %}"></script>
 
 {% endblock %}
