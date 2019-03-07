@@ -2,24 +2,23 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .models import Profile
+from django.contrib.auth.models import User
 
 
 class UserCreateForm(UserCreationForm):
 
-    error_messages = {
-        'password_mismatch': ("Пароли не совпадают"),
-        # 'duplicate_username': ("Такой пользователь уже существует"),
-    }
 
     class Meta:
         fields = ("username", "email", "password1", "password2")
         model = get_user_model()
 
+    email = forms.EmailField(max_length=40)
+
     username = forms.RegexField(
         max_length=30,
-        regex=r'^[\w]+$',
+        regex=r'^[a-zA-z0-9]+$',
         error_messages={
-            'invalid': ("Только 30 символов!")
+            'invalid': ("Можно использовать только 30 символов: латинские буквы и цифры")
         }
     )
 
@@ -33,6 +32,13 @@ class UserCreateForm(UserCreationForm):
         self.fields["email"].label = "Email"
         self.fields["password1"].label = "Пароль"
         self.fields["password2"].label = "Повторите пароль"
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        username = self.cleaned_data.get('username')
+        if email and User.objects.filter(email=email).exclude(username=username).exists():
+            raise forms.ValidationError(u'Пользователь с таким e-mail уже существует')
+        return email
 
 
 class ProfileForm(forms.ModelForm):
