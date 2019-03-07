@@ -58,7 +58,7 @@ class Player(models.Model):
 
     position = models.CharField(max_length=2, choices=POSITION_CHOICES, blank=False, null=False)
     price = models.FloatField(blank=False, null=False)
-    points = models.PositiveIntegerField(blank=False, null=False, default=0, editable=False)
+    points = models.IntegerField(blank=False, null=False, default=0, editable=False)
 
     def __str__(self):
         return str(self.club) + ', ' + self.surname + ' ' + self.name
