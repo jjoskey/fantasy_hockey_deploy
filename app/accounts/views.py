@@ -22,7 +22,6 @@ def get_team_name(request):
             form.save()
             return redirect('play')
 
-
     else:
         form = forms.ProfileForm()
 
