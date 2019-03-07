@@ -6,9 +6,22 @@ from .models import Profile
 
 class UserCreateForm(UserCreationForm):
 
+    error_messages = {
+        'password_mismatch': ("Пароли не совпадают"),
+        # 'duplicate_username': ("Такой пользователь уже существует"),
+    }
+
     class Meta:
         fields = ("username", "email", "password1", "password2")
         model = get_user_model()
+
+    username = forms.RegexField(
+        max_length=30,
+        regex=r'^[\w]+$',
+        error_messages={
+            'invalid': ("Только 30 символов!")
+        }
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
