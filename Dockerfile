@@ -43,12 +43,13 @@ COPY supervisor-app.conf /etc/supervisor/conf.d/
 
 # COPY requirements.txt and RUN pip install BEFORE adding the rest of your code, this will cause Docker's caching mechanism
 # to prevent re-installing (all your) dependencies when you made a change a line or two in your app.
+WORKDIR /home/docker/code/
 
-COPY app/requirements.txt /home/docker/code/app/
-RUN pip3 install -r /home/docker/code/app/requirements.txt
+COPY app/requirements.txt app/
+RUN pip3 install -r app/requirements.txt
 
 # add (the rest of) our code
-COPY . /home/docker/code/
+COPY . .
 
 # install django, normally you would remove this step because your project would already
 # be installed in the code/app/ directory
@@ -57,8 +58,8 @@ COPY . /home/docker/code/
 ENV DJANGO_SETTINGS_MODULE=fantasy_hockey.prod_settings
 ENV STATIC_ROOT=/home/docker/code/app/static
 #RUN django-admin collectstatic
-RUN cd /home/docker/code/app && python3.6 manage.py collectstatic  --noinput
+# RUN cd /home/docker/code/app && python3.6 manage.py collectstatic  --noinput
 
 
 EXPOSE 80
-CMD ["supervisord", "-n"]
+CMD docker-entrypoint.sh
