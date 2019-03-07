@@ -244,7 +244,7 @@ def send_players_list(request): #фукнция, которая вызывает
     # captain_stage(request.user)
     # c = Team.objects.get(user_id__user_id=request.user, is_captain=True, tour_number_end__isnull=True)
     # print(c.player_id.pk)
-
+    print(request.user)
     player = Player.objects.get(pk=37)
     profile = Profile.objects.get(user_id=request.user)
     tour = freeze_and_count.get_current_tour()

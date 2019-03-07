@@ -109,14 +109,15 @@ def send_last_freeze(request): #запускается, когда пользо�
 def receive_freeze_data(request):
 
     if request.method == 'POST':
+        utc_now = datetime.datetime.now(datetime.timezone.utc)
         freeze_data = json.loads(request.body)
         current_tour = get_current_tour()
 
         if freeze_data['message'] == 'Finish freeze time':
-            current_tour.end_time = dateparse.parse_datetime(freeze_data['time'])
+            current_tour.end_time = utc_now
             current_tour.save()
         elif freeze_data['message'] == 'Start freeze time':
-            current_tour.start_time = dateparse.parse_datetime(freeze_data['time'])
+            current_tour.start_time = utc_now
             current_tour.save()
 
         return HttpResponse('OK')

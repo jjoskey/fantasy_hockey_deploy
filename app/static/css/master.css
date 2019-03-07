@@ -107,6 +107,19 @@ p {
     h2 {
         font-size: 23px;
     }
+
+    .table-leaders {
+        font-size: 0.75rem;
+        font-weight: 100;
+        line-height: 0.4;
+        white-space: nowrap;
+        table-layout: fixed;
+    }
+
+    .position-in-leaders, .not-users-in-leaders {
+        font-size: 0.75rem;
+    }
+
 }
 
 .field {
@@ -187,9 +200,9 @@ p {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    border: 1px solid rgb(66, 66, 66, 0);
+    border: 1px solid rgba(66, 66, 66, 0);
     border-radius: 12px;
-    background: rgb(66, 66, 66, 0.7);
+    background: rgba(66, 66, 66, 0.7);
     padding-left: 2px;
     padding-right: 2px;
     cursor: pointer;
@@ -239,7 +252,7 @@ p {
     background-color: #fff !important;
 }
 
-.player_row:hover, .users_player_row:hover {
+.player_row:hover, .users_player_row:hover, .user_row:hover {
     background-color: gray;
 }
 
@@ -247,7 +260,7 @@ tbody tr {
     cursor: pointer;
 }
 
-.table_players_all td, .users_players td {
+.table_players_all td, .users_players td, .table-leaders th, .table-leaders th {
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -287,7 +300,7 @@ tbody tr {
     color: lightgray;
 }
 
-#budget, #changes, #deadline, #deadline_end, #tour, #tour_name {
+#budget, #changes, #deadline, #deadline_end, #tour, #tour_name, #user_name, #points {
     font-size: 0.75rem;
     font-weight: bold;
     color: black;
@@ -307,4 +320,42 @@ tbody tr {
 
 h5 {
     color: #747474;
+}
+
+.table-leaders {
+    margin-top: 3%;
+}
+
+.position-in-leaders {
+    text-align: right;
+    margin-top: 3%;
+}
+
+.name-and-points-for-users-team {
+    margin-left: 16%;
+}
+
+.game {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    color: gray;
+}
+
+.scores  {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.bullitts {
+    font-size: 14px;
+    line-height: 1;
+}
+
+.zero-score {
+    font-weight: normal;
+}
+
+.team_names {
+    line-height: 1;
 }

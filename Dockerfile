@@ -47,9 +47,10 @@ COPY . /home/docker/code/
 # be installed in the code/app/ directory
 # RUN django-admin.py startproject website /home/docker/code/app/
 
+ENV DJANGO_SETTINGS_MODULE=fantasy_hockey.prod_settings
 ENV STATIC_ROOT=/home/docker/code/app/static
 #RUN django-admin collectstatic
-RUN cd /home/docker/code/app && python3.6 manage.py collectstatic --clear  --noinput
+RUN cd /home/docker/code/app && python3.6 manage.py collectstatic  --noinput
 
 
 EXPOSE 80

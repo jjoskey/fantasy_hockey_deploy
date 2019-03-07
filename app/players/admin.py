@@ -26,7 +26,7 @@ class MissMatchInline(admin.TabularInline):
 
 class GameAdmin(admin.ModelAdmin):
 
-    list_display = ['tour_number', 'game_of_tour', 'home_team', 'guest_team', 'score', 'bullitt_winner']
+    list_display = ['tour_number', 'game_of_tour', 'home_team', 'guest_team', 'score', 'bullitt_winner', 'start_time']
     inlines = [EventInline, MissMatchInline]
 
 class EventAdmin(admin.ModelAdmin):

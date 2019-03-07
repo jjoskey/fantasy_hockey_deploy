@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+{% load staticfiles%}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6" style="margin-bottom: 3%; margin-top: 3%;">
+            <div class="row name-and-points-for-users-team">
+                <div class="col-6">
+                    <p id="user_name">Команда: {{ name }}</p>
+                </div>
+                <div class="col-6">
+                    <p id="points">Очки: {{ points }}</p>
+                </div>
+            </div>
+            <div class="field_wrapper">
+                <img class="field" src="{% static 'images/play/field.png' %}" alt="field">
+                <div class="field_div">
+                    <div class="forward zone">
+                        {% for player in team.FW %}
+
+                            <div class="player disabled">
+                                <img class="player_image" src="{% static '' %}{{ player.tshirt }}" alt="player_image">
+                                <p class="font-weight-light player_sign">{{ player.surname }}</p>
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+                    <div class="midfielder zone">
+                        {% for player in team.MF %}
+
+                            <div class="player disabled">
+                                <img class="player_image" src="{% static '' %}{{ player.tshirt }}" alt="player_image">
+                                <p class="font-weight-light player_sign">{{ player.surname }}</p>
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+                    <div class="defender zone">
+                        {% for player in team.DE %}
+
+                            <div class="player disabled">
+                                <img class="player_image" src="{% static '' %}{{ player.tshirt }}" alt="player_image">
+                                <p class="font-weight-light player_sign">{{ player.surname }}</p>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                    <div class="goalkeeper zone">
+
+                        <div class="player disabled">
+                            <img class="player_image" src="{% static '' %}{{ team.GK.0.tshirt }}" alt="player_image">
+                            <p class="font-weight-light player_sign">{{ team.GK.0.surname }}</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block script %}
+{{ block.super }}
+
+<script src="{% static 'script/users_team.js' %}"></script>
+
+{% endblock %}
