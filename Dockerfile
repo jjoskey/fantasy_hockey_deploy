@@ -26,10 +26,15 @@ RUN apt-get update && \
 	supervisor \
 	sqlite3 
 
+
 RUN apt-get install -y python-mysqldb
+RUN apt-get install -y libmysqlclient-dev
 
 # install uwsgi now because it takes a little while
 RUN pip3 install uwsgi
+RUN pip3 install mysqlclient
+#RUN pip3 install MySQL-python
+
 
 # setup all the configfiles
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf

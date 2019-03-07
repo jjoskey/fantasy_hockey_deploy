@@ -9,6 +9,8 @@ services:
       - /var/log/app:/var/log/supervisor
       - /var/log/app/nginx:/var/log/nginx
     restart: always
+    depends_on:
+      - db    
     
   db:
     image: mysql
@@ -22,13 +24,8 @@ services:
     volumes:
       - /var/log/app/mysql:/var/log/mysql
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    environment:
-     - PMA_ARBITRARY=1
+  adminer:
+    image: adminer
     restart: always
     ports:
-     - 8080:8080
-    volumes:
-     - /sessions
+      - 8080:8080
