@@ -16,6 +16,19 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ohw2Eege
+      MYSQL_DATABASE: fantasyhockey
+      MYSQL_USER: fantasyhockey
+      MYSQL_PASSWORD: xu2Cuosh
     volumes:
       - /var/log/app/mysql:/var/log/mysql
-      
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+     - PMA_ARBITRARY=1
+    restart: always
+    ports:
+     - 8080:8080
+    volumes:
+     - /sessions
