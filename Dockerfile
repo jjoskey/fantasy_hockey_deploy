@@ -62,4 +62,4 @@ ENV STATIC_ROOT=/home/docker/code/app/static
 
 
 EXPOSE 80
-CMD ./docker-entrypoint.sh
+#CMD ./docker-entrypoint.sh
