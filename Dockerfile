@@ -26,6 +26,8 @@ RUN apt-get update && \
 	supervisor \
 	sqlite3 
 
+RUN apt-get install python-mysqldb
+
 # install uwsgi now because it takes a little while
 RUN pip3 install uwsgi
 
