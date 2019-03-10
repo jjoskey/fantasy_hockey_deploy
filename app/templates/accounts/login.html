@@ -13,7 +13,7 @@
                 {{ form|crispy }}
 
                 <input type="submit" value="Войти" class="btn btn-primary">
-                <a class="forget-password" href="#">Забыли пароль?</a>
+                <a class="forget-password" href="{% url 'accounts:restore_password' %}">Забыли пароль?</a>
             </form>
 
         </div>

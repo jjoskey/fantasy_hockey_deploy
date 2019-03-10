@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container" style="margin-top: 3%;">
+    <h1>Правила</h1>
+    <h4>Как создать команду?</h4>
+    <p>Ваша команда должна состоять из 11 хоккеистов – один вратарь, 3 защитника, 4 полузащитника, 3 нападающих.
+    Суммарная стоимость такой команды не должна превышать 100 миллионов рублей.
+    Вы можете выбрать не более 2 игроков из одного клуба.
+    </p>
+    <h4>Кто такой капитан команды?</h4>
+    <p>После определения состава, перед каждым игровым туром вы можете назначить капитана – набранные им очки будут удваиваться.
+    Если капитан по той или причине не смог принять участие в матче, привилегия удваивания очков теряется и не переходит ни к какому другому игроку.
+    </p>
+    <h4>Как проводить трансферы?</h4>
+    <p>После первоначального формирования команды, в дальнейшем вы сможете менять состав с помощью трансферов.
+    После каждого сыгранного тура можно произвести до 3 трансферов.</p>
+    <h4>До какого срока можно вносить изменения в состав команды?</h4>
+    <p>Изменения в составе команды можно производить до наступления дедлайна – времени за 24 часа до начала первого матча в ближайшем туре.
+    После наступления дедлайна, изменения в составе невозможны до полного подсчета очков по итогам тура.</p>
+    <h4>Какой регламент турнира?</h4>
+    <p>В рамках регулярного чемпионата российской Суперлиги по хоккею на траве туром называются спаренные матчи (2 игры) между двумя соперниками.
+    В рамках общего тура(когда все команды встречаются в одном городе для кругового мини-турнира) – туром считаются все матчи этого мини-турнира.
+    То есть состав команды, сформированный до его начала, сохраняется на все игры общего тура.
+    В рамках плей-офф игровым туром считается одна стадия - 1\8 финала; 1\4 финала; 1\2 финала; финал.
+    </p>
+    <h4>Как игроки набирают очки?</h4>
+    <p>Очки начисляются игрокам команды за каждую игру, в которой они принимают участие.</p>
+    <p>Все очки начисляются в течение 36 часов после завершения матчей тура в соответствии с данными из протоколов матчей российской Суперлиги по хоккею на траве.</p>
+
+        <table class="table table-rules">
+            <thead>
+                <tr>
+                    <th scope="col" style="width: 40.00%">Действие</th>
+                    <th scope="col" class="cell_centerize"  style="width: 20%;" class="cell_centerize">ВР</th>
+                    <th scope="col" class="cell_centerize"  style="width: 20%">ЗЩ</th>
+                    <th scope="col" class="cell_centerize" style="width: 20%">ПЗ</th>
+                    <th scope="col" class="cell_centerize"  style="width: 20%">НП</th>
+                </tr>
+            </thead>
+            <tbody class="tbody-rules">
+                <tr>
+                    <td>Гол с игры</td>
+                    <td class="cell_centerize">10</td>
+                    <td class="cell_centerize">6</td>
+                    <td class="cell_centerize">5</td>
+                    <td class="cell_centerize">4</td>
+                </tr>
+                <tr>
+                    <td>Гол со штрафного/углового</td>
+                    <td colspan="4" class="cell_centerize">3</td>
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                </tr>
+                <tr>
+                    <td>Гол с пенальти</td>
+                    <td colspan="4" class="cell_centerize">2</td>
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                </tr>
+                <tr>
+                    <td>Зелёная карточка</td>
+                    <td colspan="4" class="cell_centerize">-1</td>
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                </tr>
+                <tr>
+                    <td>Жёлтая карточка</td>
+                    <td colspan="4" class="cell_centerize">-3</td>
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                </tr>
+                <tr>
+                    <td>Красная карточка</td>
+                    <td colspan="4" class="cell_centerize">-5</td>
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                </tr>
+                <tr>
+                    <td>3 или более мячей, пропущенных командой</td>
+                    <td class="cell_centerize">-3</td>
+                    <td class="cell_centerize">-2</td>
+                    <td class="cell_centerize">-</td>
+                    <td class="cell_centerize">-</td>
+                </tr>
+                <tr>
+                    <td>5 или более мячей, забитых командой</td>
+                    <td class="cell_centerize">-</td>
+                    <td class="cell_centerize">-</td>
+                    <td class="cell_centerize">2</td>
+                    <td class="cell_centerize">3</td>
+                </tr>
+                <tr>
+                    <td>Сухая победа команды (0 пропущенных мячей)</td>
+                    <td class="cell_centerize">5</td>
+                    <td class="cell_centerize">3</td>
+                    <td class="cell_centerize">-</td>
+                    <td class="cell_centerize">-</td>
+                </tr>
+                <tr>
+                    <td>Сухой матч и ничья (0:0)</td>
+                    <td class="cell_centerize">1</td>
+                    <td class="cell_centerize">1</td>
+                    <td class="cell_centerize">-</td>
+                    <td class="cell_centerize">-</td>
+                </tr>
+                <tr>
+                    <td>Победа команды в основное время</td>
+                    <td colspan="4" class="cell_centerize">3</td>
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                </tr>
+                <tr>
+                    <td>Ничья в основное время</td>
+                    <td colspan="4" class="cell_centerize">1</td>
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                </tr>
+                <tr>
+                    <td>Победа в серии послематчевых буллитов</td>
+                    <td colspan="4" class="cell_centerize">1</td>
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                </tr>
+                <tr>
+                    <td>Поражение в серии послематчевых буллитов</td>
+                    <td colspan="4" class="cell_centerize">0</td>
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                </tr>
+                <tr>
+                    <td>Поражение в основное время</td>
+                    <td colspan="4" class="cell_centerize">-1</td>
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                    <!--<td class="cell_centerize">3</td>-->
+                </tr>
+            </tbody>
+        </table>
+    <h4>Что делать, если у меня еще остались вопросы?</h4>
+    <p>Вы можете отправить ваш вопрос по адресу svistia@bk.ru или задать его в нашем сообществе <a target="_blank" href="https://vk.com/dinamo_ekb">Вконтакте</a>.</p>
+
+</div>
+
+{% endblock %}

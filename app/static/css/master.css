@@ -260,9 +260,10 @@ tbody tr {
     cursor: pointer;
 }
 
-.table_players_all td, .users_players td, .table-leaders th, .table-leaders th {
+.table_players_all td, .users_players td, .table-leaders th, .table-leaders td, .table-rules th, .table-rules td {
     overflow: hidden;
     text-overflow: ellipsis;
+    vertical-align: middle;
 }
 
 .play_page_row {
@@ -385,4 +386,16 @@ h3 {
 
 .forget-password {
     margin-left: 3%;
+}
+
+h4 {
+    color: gray;
+}
+
+.table-rules {
+    width: 100%;
+    color: gray;
+    font-size: 0.75rem;
+    line-height: 1;
+    table-layout: fixed;
 }

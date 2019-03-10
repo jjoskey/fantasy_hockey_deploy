@@ -30,5 +30,6 @@ urlpatterns = [
     url(r"^freeze_and_count/$", render_freeze_and_count, name="freeze_and_count"),
     url(r'^api_freeze_and_count/', include('freeze_and_count.urls', namespace='freeze_and_count_api')),
     url(r'^leaders/$', views.render_leaders, name="leaders"),
-    url(r'^users_team/(?P<user_id>\d+)/$', views.render_user_team)
+    url(r'^users_team/(?P<user_id>\d+)/$', views.render_user_team),
+    url(r'^rules/$', views.render_rules, name='rules')
 ]

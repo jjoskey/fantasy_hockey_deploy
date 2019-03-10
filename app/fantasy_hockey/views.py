@@ -27,7 +27,8 @@ class ThanksPage(TemplateView):
 #     template_name = "index.html"
 
 
-
+def render_rules(request):
+    return render(request, 'rules.html')
 
 
 def render_play_page(request):

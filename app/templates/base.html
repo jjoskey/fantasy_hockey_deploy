@@ -31,11 +31,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'leaders' %}">Лидеры</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'rules' %}">Правила</a>
+                </li>
             </ul>
             {% if user.is_authenticated %}
             <ul class="navbar-nav mr-right">
-                <li class="navbar-text">
-                    Добро пожаловать, {{user.username}}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:change_password' %}">Сменить пароль</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'accounts:logout' %}">Выход</a>
