@@ -141,5 +141,5 @@ admin.site.register(Result_Players, ResultPlayersAdmin)
 admin.site.register(Team_Temporary, TeamTemporaryAdmin)
 admin.site.register(Captain, CaptainAdmin)
 admin.site.unregister(Group)
-admin.site.unregister(User)
+# admin.site.unregister(User)
 admin.site.site_header = 'Russian Fantasy Hockey'

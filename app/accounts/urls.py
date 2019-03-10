@@ -9,5 +9,6 @@ urlpatterns = [
     url(r"logout/$", auth_views.LogoutView.as_view(), name="logout"),
     url(r"signup/$", views.SignUp.as_view(), name="signup"),
     url(r"teamname/$", views.get_team_name, name="teamname"),
-    url(r'condtitons/$', views.conditions, name="conditions")
+    url(r'condtitons/$', views.conditions, name="conditions"),
+    url(r"restore_password/$", views.restore_password, name="restore_password"),
 ]

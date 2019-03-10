@@ -5,6 +5,12 @@ from django.shortcuts import render, redirect
 from . import forms
 from django.http import HttpResponseRedirect
 from .models import Profile
+from django.contrib.auth.models import User
+import random
+import string
+
+def password_generator():
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=6))
 
 
 class SignUp(CreateView):
@@ -26,6 +32,35 @@ def get_team_name(request):
         form = forms.ProfileForm()
 
     return render(request, 'accounts/teamname.html', {'form': form})
+
+
+def restore_password(request, message=None):
+
+    if request.method == 'POST':
+        form = forms.RestorePassword(request.POST)
+        email = form['email'].value()
+        # try:
+        #     user = User.objects.get(email=email)
+        # except:
+        #     user = False
+        #     message = 'YES'
+            # return render(request, 'accounts/restore_password.html', {'form': form, 'message': message})
+        try:
+            user = User.objects.get(email=email)
+            print(user)
+        except:
+            user = False
+            message = 'Пользователя с таким email нет'
+
+        if form.is_valid() and user:
+            password = password_generator()
+            print(password)  # !!!прислать письмо юзеру с новым паролем
+            user.set_password('12345')
+            user.save()
+    else:
+        form = forms.RestorePassword()
+
+    return render(request, 'accounts/restore_password.html', {'form': form, 'message': message})
 
 
 def conditions(request): # заставляет юзера заполнить название команды, если оно пусто
