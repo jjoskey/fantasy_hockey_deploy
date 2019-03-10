@@ -8,6 +8,10 @@ from .models import Profile
 from django.contrib.auth.models import User
 import random
 import string
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+
 
 def password_generator():
     return ''.join(random.choices(string.ascii_letters + string.digits, k=6))
@@ -37,7 +41,7 @@ def get_team_name(request):
 def restore_password(request, message=None):
 
     if request.method == 'POST':
-        form = forms.RestorePassword(request.POST)
+        form = forms.RestorePasswordForm(request.POST)
         email = form['email'].value()
         # try:
         #     user = User.objects.get(email=email)
@@ -58,7 +62,7 @@ def restore_password(request, message=None):
             user.set_password('12345')
             user.save()
     else:
-        form = forms.RestorePassword()
+        form = forms.RestorePasswordForm()
 
     return render(request, 'accounts/restore_password.html', {'form': form, 'message': message})
 
@@ -73,3 +77,13 @@ def conditions(request): # заставляет юзера заполнить н
             return redirect('accounts:teamname')
     else:
         return redirect('accounts:login')
+
+
+@login_required
+def change_password(request):
+   form = PasswordChangeForm(user=request.user, data=request.POST or None)
+   if form.is_valid():
+     form.save()
+     update_session_auth_hash(request, form.user)
+     return redirect('/')
+   return render(request, 'accounts/change_password.html', {'form': form})

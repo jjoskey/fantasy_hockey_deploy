@@ -11,4 +11,5 @@ urlpatterns = [
     url(r"teamname/$", views.get_team_name, name="teamname"),
     url(r'condtitons/$', views.conditions, name="conditions"),
     url(r"restore_password/$", views.restore_password, name="restore_password"),
+    url(r'change_password/$', views.change_password, name='change_password')
 ]

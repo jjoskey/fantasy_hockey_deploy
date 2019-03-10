@@ -50,7 +50,7 @@ class UserCreateForm(UserCreationForm):
         return email
 
 
-class RestorePassword(forms.ModelForm):
+class RestorePasswordForm(forms.ModelForm):
 
     class Meta:
         model = get_user_model()
@@ -71,3 +71,8 @@ class ProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+
+# class ChangePasswordForm(forms.ModelForm):
+#     class Meta:
+#         model = get_user_model()
+#         fileds = ('password1', 'password2',)
