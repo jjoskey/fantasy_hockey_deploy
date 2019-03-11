@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.mail import EmailMessage
 
 
 DEFAULT_BUDGET = 16
@@ -27,6 +28,12 @@ class Profile(models.Model):
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
             Profile.objects.create(user_id=instance)
+            email = EmailMessage(
+                'Вы успешно зарегистрировались',
+                'Спасибо за регистрацию, ваше имя пользователя: {}, обязательно ознакомьтесь с правилами: https://fantasyhockey.ru/rules/.'.format(instance.username),
+                to=[instance.email]
+            )
+            email.send()
 
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
