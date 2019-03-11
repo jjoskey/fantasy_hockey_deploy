@@ -7,6 +7,7 @@ from django.core import serializers
 from accounts.models import Profile, DEFAULT_BUDGET
 from freeze_and_count import views as freeze_and_count
 import datetime
+from django.core.mail import EmailMessage
 
 
 DEFAULT_CLUBS_Q = 4
@@ -250,6 +251,8 @@ def collect_data(user):
 
 @csrf_exempt
 def send_players_list(request): #фукнция, которая вызывается при отрисовке на странице play.html
+    # email = EmailMessage('Test', 'Test Testov Yo', to=['alexander.s.ilyin@gmail.com'])
+    # email.send()
 
     # player = Player.objects.get(pk=27)
     # print(player)

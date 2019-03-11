@@ -54,16 +54,25 @@ def restore_password(request, message=None):
             # return render(request, 'accounts/restore_password.html', {'form': form, 'message': message})
         try:
             user = User.objects.get(email=email)
-            print(user)
+            # print(user)
         except:
             user = False
             message = 'Пользователя с таким email нет'
 
         if form.is_valid() and user:
             password = password_generator()
-            print(password)  # !!!прислать письмо юзеру с новым паролем
-            user.set_password('12345')
+            email = EmailMessage(
+                'Новый пароль Fantasy Hockey',
+                'Мы сделали вам новый пароль. \n'
+                'Ваше имя пользователя: {}, \n'
+                'пароль: {}.'.format(user.username, password),
+                to=[user.email]
+            )
+            email.send()
+            # print(password)  # !!!прислать письмо юзеру с новым паролем
+            user.set_password(password)
             user.save()
+            return redirect('accounts:login')
     else:
         form = forms.RestorePasswordForm()
 

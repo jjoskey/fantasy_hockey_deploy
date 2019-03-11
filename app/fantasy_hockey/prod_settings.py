@@ -128,4 +128,4 @@ SERVER_MAIL = 'info@fantasyhockey.ru'
 EMAIL_HOST_USER = 'info@fantasyhockey.ru'
 EMAIL_HOST_PASSWORD = 'FantasyHockey1902'
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = '(Fantasy Hockey) <info@fantasyhockey.ru>'
