@@ -1,3 +1,6 @@
+
+
+
 .asteriskField {
     display: none;
 }
@@ -32,12 +35,26 @@ margin-bottom: 60px;
 }
 
 @media screen and (max-width: 991px) {
-    body {
-        margin-bottom: 0;
-    }
 
     .footer {
         position: static;
+        flex-basis: 60px;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin-bottom: 0;
+    }
+
+    .navbar {
+        flex-basis: 66px;
+    }
+
+
+    .container {
+        flex: 1;
     }
 }
 
