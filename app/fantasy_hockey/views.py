@@ -13,6 +13,8 @@ from django.core import serializers
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
 from freeze_and_count import views as freeze_and_count
+from players import views as players
+from django.contrib.auth.models import User
 
 
 class LoggedinPage(TemplateView):
@@ -82,8 +84,10 @@ def choose_tshirt(player_id):
 
 def render_user_team(request, user_id):
     profile = Profile.objects.get(pk=user_id)
+    user = User.objects.get(pk=user_id)
     team_instances = Team.objects.filter(user_id=profile, tour_number_end__isnull=True)
     team = {'GK': [], 'DE': [], 'MF': [], 'FW': []}
+    last_3_results = players.get_results_of_3_last_tours(user)
 
     if len(team_instances) == 11:
         for instance in team_instances:
@@ -93,7 +97,7 @@ def render_user_team(request, user_id):
         # print(profile.user_id.username)
         # print(profile.points)
 
-        return render(request, 'users_team.html', context={'team': team, 'name': profile.team_name, 'points': profile.points})
+        return render(request, 'users_team.html', context={'team': team, 'name': profile.team_name, 'points': profile.points, 'results': last_3_results})
     else:
         return HttpResponseNotFound(f'<h1>У такого пользователя нет команды, или что-то пошло не так...</h1>')
 
