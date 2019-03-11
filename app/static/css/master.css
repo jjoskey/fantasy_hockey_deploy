@@ -399,3 +399,7 @@ h4 {
     line-height: 1;
     table-layout: fixed;
 }
+
+.table-rules tbody td {
+    cursor: default;
+}
