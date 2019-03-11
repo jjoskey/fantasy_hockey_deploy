@@ -306,6 +306,16 @@ function cancelButtonHide(data) {
 }
 
 
+function renderLast3Result(data) {
+    if (Object.keys(data.last_3_result).length) {
+        $('#last_3_result').parent().removeClass('hide');
+        for (key in data.last_3_result) {
+            $('#last_3_result').append(`<li>${key} тур: ${data.last_3_result[key]}`)
+        }
+    }
+}
+
+
 function hidingElementsForCaptainChoosing(data) {
 
     inputGroup = $('.input-group-div');
@@ -446,6 +456,7 @@ function useRecievedData(data) {
     chooseCaptain(data);
     hidingElementsForCaptainChoosing(data);
     showTourData(data);
+    renderLast3Result(data);
 }
 
 window.onresize = resizePlayerSign

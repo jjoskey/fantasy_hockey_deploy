@@ -171,9 +171,9 @@ class Team_Temporary(models.Model):
 
 class Result_Profiles(models.Model):
 
-    user_id = models.ForeignKey(Profile, editable=False)
-    tour_number = models.ForeignKey(Tour, editable=False) #добавить сюда ссылка на Tour Model
-    points = models.PositiveIntegerField(editable=False, default=0)
+    user_id = models.ForeignKey(Profile)
+    tour_number = models.ForeignKey(Tour)
+    points = models.PositiveIntegerField(default=0)
 
     class Meta:
 

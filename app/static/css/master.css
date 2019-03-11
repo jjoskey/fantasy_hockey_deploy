@@ -403,3 +403,11 @@ h4 {
 .table-rules tbody td {
     cursor: default;
 }
+
+#last_3_result {
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: black;
+}

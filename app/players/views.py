@@ -204,6 +204,16 @@ def captain_stage(user):
                 return 'choose_captain'
 
 
+def get_results_of_3_last_tours(user):
+    dict_to_return = dict()
+    profile = Profile.objects.get(user_id=user)
+    last_3_tours_result = Result_Profiles.objects.filter(tour_number__season=YEAR, user_id=profile).order_by('-id')[:3]
+    for instance in last_3_tours_result:
+        dict_to_return[instance.tour_number.number] = instance.points
+    return dict_to_return
+
+
+
 def collect_data(user):
     temporary_team = get_users_temporary_team(user)
     all_players = all_players_to_send(temporary_team)
@@ -212,7 +222,7 @@ def collect_data(user):
     save = inf_for_save_button(temporary_team, user)
     cancel = inf_for_cancel_button(user)
     captain_stage_user = captain_stage(user)
-
+    last_3_tours_result = get_results_of_3_last_tours(user)
     current_profile = Profile.objects.get(user_id=user)
     changes = current_profile.changes_count
     if Team.objects.filter(user_id=current_profile, is_captain=True).exclude(
@@ -231,7 +241,8 @@ def collect_data(user):
         'changes': changes,
         'captain_stage': captain_stage_user,
         'captain': captain if captain == False else captain.player_id.pk,
-        'tour_info': tour_info
+        'tour_info': tour_info,
+        'last_3_result': last_3_tours_result
 
     }
 
@@ -244,8 +255,8 @@ def send_players_list(request): #фукнция, которая вызывает
     # captain_stage(request.user)
     # c = Team.objects.get(user_id__user_id=request.user, is_captain=True, tour_number_end__isnull=True)
     # print(c.player_id.pk)
-    print(request.user)
-    player = Player.objects.get(pk=37)
+    get_results_of_3_last_tours(request.user)
+    # player = Player.objects.get(pk=37)
     profile = Profile.objects.get(user_id=request.user)
     tour = freeze_and_count.get_current_tour()
     captains = Captain.objects.filter(tour_number=tour)
