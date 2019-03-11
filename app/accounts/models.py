@@ -42,3 +42,14 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.user_id)
 
+
+class AdBanners(models.Model):
+
+    name = models.CharField(max_length=120, null=False, blank=False)
+    start_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=False, null=False)
+    end_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=False, null=False)
+    small_image = models.ImageField(upload_to='banners/', blank=False, null=False)
+
+
+
+

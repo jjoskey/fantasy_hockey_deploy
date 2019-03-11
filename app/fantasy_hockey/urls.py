@@ -17,6 +17,8 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from . import views
 from freeze_and_count.views import render_freeze_and_count
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -32,4 +34,4 @@ urlpatterns = [
     url(r'^leaders/$', views.render_leaders, name="leaders"),
     url(r'^users_team/(?P<user_id>\d+)/$', views.render_user_team),
     url(r'^rules/$', views.render_rules, name='rules')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

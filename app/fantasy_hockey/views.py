@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 # from players.models import Player
-from accounts.models import Profile
+from accounts.models import Profile, AdBanners
 from players.models import Team, Game
 # from players import views as players_views
 # from players.views import *
@@ -15,6 +15,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 from freeze_and_count import views as freeze_and_count
 from players import views as players
 from django.contrib.auth.models import User
+import datetime
 
 
 class LoggedinPage(TemplateView):
@@ -34,10 +35,18 @@ def render_rules(request):
 
 
 def render_play_page(request):
+
     if request.user.is_authenticated():
         current_profile = Profile.objects.get(user_id=request.user)
         if current_profile.team_name:
-            return render(request, 'play.html')
+            utc_now = datetime.datetime.now(datetime.timezone.utc)
+            try:
+                banners = AdBanners.objects.get(start_time__lte=utc_now, end_time__gte=utc_now)
+            except:
+                banners = False
+            print(banners)
+
+            return render(request, 'play.html', context={'banners': banners})
         else:
             return redirect('accounts:teamname')
     else:

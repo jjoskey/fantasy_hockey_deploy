@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile
+from .models import Profile, AdBanners
 # Register your models here.
 
 class ProfileAdmin(admin.ModelAdmin):
@@ -15,6 +15,9 @@ class ProfileAdmin(admin.ModelAdmin):
     # list_editable = ['budget'] # делает поле редактируемым, даже если в базе оно нередактируемо
 
 
+class AdBannersAdmin(admin.ModelAdmin):
+    list_display = ['name', 'start_time', 'end_time', 'small_image']
 
 
+admin.site.register(AdBanners, AdBannersAdmin)
 admin.site.register(Profile, ProfileAdmin)
