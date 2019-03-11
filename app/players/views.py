@@ -8,6 +8,7 @@ from accounts.models import Profile, DEFAULT_BUDGET
 from freeze_and_count import views as freeze_and_count
 import datetime
 
+
 DEFAULT_CLUBS_Q = 4
 DEFAULT_PLAYERS_Q = 11
 DEFAULT_POS_Q = {'GK': [1, 'вратарь'], 'DE': [3, 'защитника'], 'MF': [4, 'полузащитника'], 'FW': [3, 'нападающих']}
@@ -249,13 +250,14 @@ def collect_data(user):
 
 @csrf_exempt
 def send_players_list(request): #фукнция, которая вызывается при отрисовке на странице play.html
+
     # player = Player.objects.get(pk=27)
     # print(player)
     # make_player_captain(player, request.user)
     # captain_stage(request.user)
     # c = Team.objects.get(user_id__user_id=request.user, is_captain=True, tour_number_end__isnull=True)
     # print(c.player_id.pk)
-    get_results_of_3_last_tours(request.user)
+    # get_results_of_3_last_tours(request.user)
     # player = Player.objects.get(pk=37)
     profile = Profile.objects.get(user_id=request.user)
     tour = freeze_and_count.get_current_tour()

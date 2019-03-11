@@ -44,7 +44,6 @@ def render_play_page(request):
         return redirect('accounts:login')
 
 
-
 def render_leaders(request):
     users = Profile.objects.filter(points__gt=0).order_by('-points')
     position = False

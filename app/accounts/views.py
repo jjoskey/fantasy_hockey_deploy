@@ -11,6 +11,9 @@ import string
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
+from django.core.mail import EmailMessage
+# email = EmailMessage('Test', 'Test Testov Yo', to=['alexander.s.ilyin@gmail.com'])
+# email.send()
 
 
 def password_generator():

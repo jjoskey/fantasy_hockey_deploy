@@ -116,3 +116,16 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 LOGIN_REDIRECT_URL = 'loggedin'
 LOGOUT_REDIRECT_URL = 'thanks'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'mail.netangels.ru'
+SERVER_MAIL = 'info@fantasyhockey.ru'
+EMAIL_HOST_USER = 'info@fantasyhockey.ru'
+EMAIL_HOST_PASSWORD = 'FantasyHockey1902'
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+
