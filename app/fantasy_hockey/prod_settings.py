@@ -129,3 +129,6 @@ EMAIL_HOST_USER = 'info@fantasyhockey.ru'
 EMAIL_HOST_PASSWORD = 'FantasyHockey1902'
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = '(Fantasy Hockey) <info@fantasyhockey.ru>'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
