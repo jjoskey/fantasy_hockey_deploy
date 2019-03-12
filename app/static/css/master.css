@@ -45,10 +45,6 @@ margin-bottom: 60px;
         margin-bottom: 0;
     }
 
-    .navbar {
-        flex-basis: 66px;
-    }
-
 
     .container {
         flex: 1;
