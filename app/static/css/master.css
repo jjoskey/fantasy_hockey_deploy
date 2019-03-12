@@ -434,7 +434,8 @@ h4 {
 }
 
 .banner {
-    margin: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     max-width: 100%;
     height: auto;
 }
@@ -443,3 +444,38 @@ h4 {
     text-align: center;
 }
 
+@media screen and (max-width: 414px) {
+
+    .medium_image {
+        display: none;
+    }
+
+    .large_image {
+        display: none;
+    }
+
+}
+
+@media screen and (min-width: 415px) and (max-width: 800px) {
+
+    .small_image {
+        display: none;
+    }
+
+    .large_image {
+        display: none;
+    }
+
+}
+
+@media screen and (min-width: 801px) {
+
+    .small_image {
+        display: none;
+    }
+
+    .medium_image {
+        display: none;
+    }
+
+}

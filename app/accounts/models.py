@@ -48,7 +48,10 @@ class AdBanners(models.Model):
     name = models.CharField(max_length=120, null=False, blank=False)
     start_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=False, null=False)
     end_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=False, null=False)
-    small_image = models.ImageField(upload_to='banners/', blank=False, null=False)
+    small_image = models.ImageField(upload_to='banners/', blank=False, null=False, help_text='Resolution 414 x 50 px')
+    medium_image = models.ImageField(upload_to='banners/', blank=False, null=False, help_text='Resolution 800 x 80 px')
+    large_image = models.ImageField(upload_to='banners/', blank=False, null=False, help_text='Resolution 1140 x 90 px')
+    link = models.URLField(blank=True, null=True)
 
 
 

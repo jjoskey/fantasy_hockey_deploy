@@ -2,6 +2,36 @@
 {% block content %}
 {% load staticfiles%}
 
+{% if banners %}
+    <div class="container small_image">
+        <div class="banner-div">
+            {% if banners.link %}
+                <a href="{{ banners.link }}" target="_blank"><img class="banner" src="{{ banners.small_image.url }}" alt="small_banner"></a>
+            {% else %}
+                <img class="banner" src="{{ banners.small_image.url }}" alt="small_banner">
+            {% endif %}
+        </div>
+    </div>
+    <div class="container medium_image">
+        <div class="banner-div">
+            {% if banners.link %}
+                <a href="{{ banners.link }}" target="_blank"><img class="banner" src="{{ banners.medium_image.url }}" alt="small_banner"></a>
+            {% else %}
+                <img class="banner" src="{{ banners.medium_image.url }}" alt="medium_banner">
+            {% endif %}
+        </div>
+    </div>
+    <div class="container large_image">
+        <div class="banner-div">
+            {% if banners.link %}
+                <a href="{{ banners.link }}" target="_blank"><img class="banner" src="{{ banners.large_image.url }}" alt="small_banner"></a>
+            {% else %}
+                <img class="banner" src="{{ banners.large_image.url }}" alt="large_banner">
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+
 <div class="container">
 {% if not users %}
     <p class="not-users-in-leaders">Лидеры появятся после окончания 1-го тура.</p>

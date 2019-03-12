@@ -16,7 +16,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 class AdBannersAdmin(admin.ModelAdmin):
-    list_display = ['name', 'start_time', 'end_time', 'small_image']
+    list_display = ['name', 'start_time', 'end_time', 'small_image', 'medium_image', 'large_image', 'link']
 
 
 admin.site.register(AdBanners, AdBannersAdmin)

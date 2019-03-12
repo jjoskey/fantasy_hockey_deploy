@@ -44,7 +44,6 @@ def render_play_page(request):
                 banners = AdBanners.objects.get(start_time__lte=utc_now, end_time__gte=utc_now)
             except:
                 banners = False
-            print(banners)
 
             return render(request, 'play.html', context={'banners': banners})
         else:
@@ -67,10 +66,15 @@ def render_leaders(request):
 
     if len(users) > 100:
         users = users[:100]
-    # print(type(users))
-    # print(position)
 
-    return render(request, 'leaders.html', context={'users': users, 'position': position, 'points': points})
+    utc_now = datetime.datetime.now(datetime.timezone.utc)
+    try:
+        banners = AdBanners.objects.get(start_time__lte=utc_now, end_time__gte=utc_now)
+    except:
+        banners = False
+    print(banners)
+
+    return render(request, 'leaders.html', context={'users': users, 'position': position, 'points': points, 'banners': banners})
 
 
 def choose_tshirt(player_id):
