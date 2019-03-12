@@ -6,11 +6,16 @@ from django.core.validators import validate_comma_separated_integer_list
 
 
 class Tour(models.Model):
-    season = models.PositiveIntegerField(blank=False, null=False, default=2019)
-    number = models.PositiveSmallIntegerField()
-    name = models.CharField(max_length=64, blank=True, null=True)
-    start_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True)
-    supposed_end_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True)
+    season = models.PositiveIntegerField(blank=False, null=False, default=2019,
+                                         help_text='Год тура')
+    number = models.PositiveSmallIntegerField(
+        help_text='Номер тура. Если это матч плей-офф, номер всё равно вбивается. Он будет использован, при подсчёте очков.')
+    name = models.CharField(max_length=64, blank=True, null=True,
+                            help_text='Имя тура заполняется только во время плей-офф. Например, "1/8 финала"')
+    start_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True,
+                                      help_text='Начало дедлайна в туре.')
+    supposed_end_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True,
+                                             help_text='Предположительные время конца дедлайна в туре. Показывается для пользователя, когда ему ждать результатов подсчёта очков.')
     end_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True)
 
     def __str__(self):
@@ -66,13 +71,16 @@ class Player(models.Model):
 
 class Game(models.Model):
 
-    tour_number = models.ForeignKey(Tour) #добавить сюда ссылка на Tour Model + добавить номер игры
-    game_of_tour = models.PositiveSmallIntegerField(null=False, blank=False)
-    home_team = models.ForeignKey(Club, related_name='Home')
-    guest_team = models.ForeignKey(Club, related_name='Guest')
-    score = models.CharField(validators=[validate_comma_separated_integer_list], max_length=5, null=True, blank=True)
-    bullitt_winner = models.ForeignKey(Club, related_name='Bullitt_Winner', null=True, blank=True)
-    start_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True)
+    tour_number = models.ForeignKey(Tour, help_text='Тур, в который прошла игра')
+    game_of_tour = models.PositiveSmallIntegerField(null=False, blank=False, help_text='Номер игры в туре (в туре может пройти больше двух игр)')
+    home_team = models.ForeignKey(Club, related_name='Home', help_text='Команда, которая играла дома')
+    guest_team = models.ForeignKey(Club, related_name='Guest', help_text='Команда, которая играла на выезде')
+    score = models.CharField(validators=[validate_comma_separated_integer_list], max_length=5, null=True, blank=True,
+                             help_text='Очки, записанные через запятую БЕЗ пробелов, например "2,1"')
+    bullitt_winner = models.ForeignKey(Club, related_name='Bullitt_Winner', null=True, blank=True,
+                                       help_text='Победитель по буллитам. Поле заполняется только когда матч закончен в ничью')
+    start_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True,
+                                      help_text='Время, когда игра начнётся. Время вписывается по часовому поясу UTC.')
 
     def __str__(self):
         return 'тур ' + str(self.tour_number) + ', игра: ' + str(self.game_of_tour) + ', ' + self.home_team.name + ' - ' + self.guest_team.name
@@ -196,8 +204,8 @@ class Result_Players(models.Model):
 
 class Miss_Match(models.Model):
 
-    match_id = models.ForeignKey(Game)
-    player_id = models.ForeignKey(Player)
+    match_id = models.ForeignKey(Game, help_text='Матч, который пропустил игрок')
+    player_id = models.ForeignKey(Player, help_text='Игрок, пропустивший матч')
 
     def __str__(self):
         return str(self.match_id) + str(self.player_id)
@@ -215,3 +223,14 @@ class Captain(models.Model):
     class Meta:
 
         unique_together = ['user_id', 'tour_number']
+
+
+class Transfer(models.Model):
+
+    player_id = models.ForeignKey(Player, null=False, blank=False)
+    old_club = models.ForeignKey(Club, null=False, blank=False, help_text='Клуб, из которого ушёл игрок.')
+    tour_number_start = models.ForeignKey(Tour, null=False, blank=False, related_name='Tour_Number_Start', help_text='Тур, в котором игрок начал играть за клуб (если с начала сезона, то ставится 1 тур.')
+    tour_number_end = models.ForeignKey(Tour, null=False, blank=False, related_name='Tour_Number_End', help_text='Тур, в котором игрок сыграл последний матч за клуб')
+
+    def __str__(self):
+        return '{} ушёл из {} в {} туре'.format(str(self.player_id), str(self.old_club), str(self.tour_number_end.number))

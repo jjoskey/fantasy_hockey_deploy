@@ -251,6 +251,7 @@ def collect_data(user):
 
 @csrf_exempt
 def send_players_list(request): #фукнция, которая вызывается при отрисовке на странице play.html
+
     # email = EmailMessage('Test', 'Test Testov Yo', to=['alexander.s.ilyin@gmail.com'])
     # email.send()
 
