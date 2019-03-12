@@ -2,70 +2,69 @@
 {% block content %}
 {% load staticfiles%}
 
-{% if banners %}
-    <div class="container small_image">
-        <div class="banner-div">
-            {% if banners.link %}
-                <a href="{{ banners.link }}" target="_blank"><img class="banner" src="{{ banners.small_image.url }}" alt="small_banner"></a>
-            {% else %}
-                <img class="banner" src="{{ banners.small_image.url }}" alt="small_banner">
-            {% endif %}
-        </div>
-    </div>
-    <div class="container medium_image">
-        <div class="banner-div">
-            {% if banners.link %}
-                <a href="{{ banners.link }}" target="_blank"><img class="banner" src="{{ banners.medium_image.url }}" alt="small_banner"></a>
-            {% else %}
-                <img class="banner" src="{{ banners.medium_image.url }}" alt="medium_banner">
-            {% endif %}
-        </div>
-    </div>
-    <div class="container large_image">
-        <div class="banner-div">
-            {% if banners.link %}
-                <a href="{{ banners.link }}" target="_blank"><img class="banner" src="{{ banners.large_image.url }}" alt="small_banner"></a>
-            {% else %}
-                <img class="banner" src="{{ banners.large_image.url }}" alt="large_banner">
-            {% endif %}
-        </div>
-    </div>
-{% endif %}
-
 <div class="container">
-{% if not users %}
-    <p class="not-users-in-leaders">Лидеры появятся после окончания 1-го тура.</p>
-{% else %}
-<table class="table table-leaders">
-    <thead>
-        <tr>
-            <th scope="col" class="cell_centerize">Место</th>
-            <th scope="col">Пользователь</th>
-            <th scope="col">Команда</th>
-            <th scope="col" class="cell_centerize">Очки</th>
-        </tr>
-    </thead>
-    <tbody class="tbody-leaders">
-        {% if position %}
-            <p class="position-in-leaders">Вы на {{ position }} месте с количеством очков: {{ points }}</p>
-        {% endif %}
+    {% if banners %}
+        <div class="small_image">
+            <div class="banner-div">
+                {% if banners.link %}
+                    <a href="{{ banners.link }}" target="_blank"><img class="banner" src="{{ banners.small_image.url }}" alt="small_banner"></a>
+                {% else %}
+                    <img class="banner" src="{{ banners.small_image.url }}" alt="small_banner">
+                {% endif %}
+            </div>
+        </div>
+        <div class="medium_image">
+            <div class="banner-div">
+                {% if banners.link %}
+                    <a href="{{ banners.link }}" target="_blank"><img class="banner" src="{{ banners.medium_image.url }}" alt="small_banner"></a>
+                {% else %}
+                    <img class="banner" src="{{ banners.medium_image.url }}" alt="medium_banner">
+                {% endif %}
+            </div>
+        </div>
+        <div class="large_image">
+            <div class="banner-div">
+                {% if banners.link %}
+                    <a href="{{ banners.link }}" target="_blank"><img class="banner" src="{{ banners.large_image.url }}" alt="small_banner"></a>
+                {% else %}
+                    <img class="banner" src="{{ banners.large_image.url }}" alt="large_banner">
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+    {% if not users %}
+        <p class="not-users-in-leaders">Лидеры появятся после окончания 1-го тура.</p>
+    {% else %}
+    <table class="table table-leaders">
+        <thead>
+            <tr>
+                <th scope="col" class="cell_centerize">Место</th>
+                <th scope="col">Пользователь</th>
+                <th scope="col">Команда</th>
+                <th scope="col" class="cell_centerize">Очки</th>
+            </tr>
+        </thead>
+        <tbody class="tbody-leaders">
+            {% if position %}
+                <p class="position-in-leaders">Вы на {{ position }} месте с количеством очков: {{ points }}</p>
+            {% endif %}
 
-        {% for user in users %}
+            {% for user in users %}
 
-                <tr class="user_row" data-user-id="{{ user.pk }}">
+                    <tr class="user_row" data-user-id="{{ user.pk }}">
 
-                    <td class="cell_centerize">{{ forloop.counter }}</td>
-                    <td>{{ user.user_id.username }}</td>
-                    <td>{{ user.team_name }}</td>
-                    <td class="cell_centerize">{{ user.points }}</td>
+                        <td class="cell_centerize">{{ forloop.counter }}</td>
+                        <td>{{ user.user_id.username }}</td>
+                        <td>{{ user.team_name }}</td>
+                        <td class="cell_centerize">{{ user.points }}</td>
 
-                </tr>
+                    </tr>
 
-        {% endfor %}
+            {% endfor %}
 
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
 {% endif %}
 </div>

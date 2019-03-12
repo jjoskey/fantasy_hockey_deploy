@@ -31,7 +31,14 @@ class ThanksPage(TemplateView):
 
 
 def render_rules(request):
-    return render(request, 'rules.html')
+    utc_now = datetime.datetime.now(datetime.timezone.utc)
+
+    try:
+        banners = AdBanners.objects.get(start_time__lte=utc_now, end_time__gte=utc_now)
+    except:
+        banners = False
+
+    return render(request, 'rules.html', context={'banners': banners})
 
 
 def render_play_page(request):
@@ -72,7 +79,6 @@ def render_leaders(request):
         banners = AdBanners.objects.get(start_time__lte=utc_now, end_time__gte=utc_now)
     except:
         banners = False
-    print(banners)
 
     return render(request, 'leaders.html', context={'users': users, 'position': position, 'points': points, 'banners': banners})
 
@@ -100,6 +106,11 @@ def render_user_team(request, user_id):
     team_instances = Team.objects.filter(user_id=profile, tour_number_end__isnull=True)
     team = {'GK': [], 'DE': [], 'MF': [], 'FW': []}
     last_3_results = players.get_results_of_3_last_tours(user)
+    utc_now = datetime.datetime.now(datetime.timezone.utc)
+    try:
+        banners = AdBanners.objects.get(start_time__lte=utc_now, end_time__gte=utc_now)
+    except:
+        banners = False
 
     if len(team_instances) == 11:
         for instance in team_instances:
@@ -109,7 +120,7 @@ def render_user_team(request, user_id):
         # print(profile.user_id.username)
         # print(profile.points)
 
-        return render(request, 'users_team.html', context={'team': team, 'name': profile.team_name, 'points': profile.points, 'results': last_3_results})
+        return render(request, 'users_team.html', context={'team': team, 'name': profile.team_name, 'points': profile.points, 'results': last_3_results, 'banners': banners})
     else:
         return HttpResponseNotFound(f'<h1>У такого пользователя нет команды, или что-то пошло не так...</h1>')
 

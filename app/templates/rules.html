@@ -1,7 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container" style="margin-top: 3%;">
+<div class="container" style="margin-top: 10px;">
+    {% if banners %}
+        <div class="small_image">
+            <div class="banner-div">
+                {% if banners.link %}
+                    <a href="{{ banners.link }}" target="_blank"><img class="banner" src="{{ banners.small_image.url }}" alt="small_banner"></a>
+                {% else %}
+                    <img class="banner" src="{{ banners.small_image.url }}" alt="small_banner">
+                {% endif %}
+            </div>
+        </div>
+        <div class="medium_image">
+            <div class="banner-div">
+                {% if banners.link %}
+                    <a href="{{ banners.link }}" target="_blank"><img class="banner" src="{{ banners.medium_image.url }}" alt="small_banner"></a>
+                {% else %}
+                    <img class="banner" src="{{ banners.medium_image.url }}" alt="medium_banner">
+                {% endif %}
+            </div>
+        </div>
+        <div class="large_image">
+            <div class="banner-div">
+                {% if banners.link %}
+                    <a href="{{ banners.link }}" target="_blank"><img class="banner" src="{{ banners.large_image.url }}" alt="small_banner"></a>
+                {% else %}
+                    <img class="banner" src="{{ banners.large_image.url }}" alt="large_banner">
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
     <h1>Правила</h1>
     <h4>Как создать команду?</h4>
     <p>Ваша команда должна состоять из 11 хоккеистов – один вратарь, 3 защитника, 4 полузащитника, 3 нападающих.
