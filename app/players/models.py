@@ -225,3 +225,11 @@ class Captain(models.Model):
         unique_together = ['user_id', 'tour_number']
 
 
+class Players_Team_in_Tour(models.Model):
+
+    tour_number = models.ForeignKey(Tour, blank=False, null=False)
+    player_id = models.ForeignKey(Player, blank=False, null=False)
+    club = models.ForeignKey(Club, blank=False, null=False)
+
+    class Meta:
+        unique_together = ['player_id', 'tour_number', 'club']

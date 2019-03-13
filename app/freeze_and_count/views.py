@@ -7,7 +7,7 @@ from django.utils import timezone
 import datetime
 import json
 from django.utils import dateparse
-from players.models import Club, Player, Game, Event, Team, Tour, Result_Players, Miss_Match, Result_Profiles, Team_Temporary, Captain
+from players.models import Club, Player, Game, Event, Team, Tour, Result_Players, Miss_Match, Result_Profiles, Team_Temporary, Captain, Players_Team_in_Tour
 from accounts.models import Profile
 from players.views import DEFAULT_PLAYERS_Q
 from django.db.models import Q
@@ -17,11 +17,11 @@ from players import views
 YEAR = datetime.datetime.now().year
 DEFAULT_CHANGES_COUNT = 3
 
+
 @staff_member_required
 def render_freeze_and_count(request):
-
-
-
+    tour = get_current_tour()
+    save_players_in_PTT_model(tour)
     return render(request, 'freeze_and_count.html')
 
 
@@ -150,6 +150,12 @@ def profile_can_play(profile):
                                tour_number_start__number__lte=current_tour.number, tour_number_end__isnull=True)) == DEFAULT_PLAYERS_Q:
         return True
     return False
+
+
+def save_players_in_PTT_model(tour):
+    players = Player.objects.all()
+    for player in players:
+        Players_Team_in_Tour.objects.update_or_create(player_id=player, tour_number=tour, club=player.club)
 
 
 def count_points(tour):
