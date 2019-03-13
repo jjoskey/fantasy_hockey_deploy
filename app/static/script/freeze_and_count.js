@@ -15,7 +15,7 @@ function showButton(data) {
     } else if (data.message === 'Freeze time is coming soon') {
         freezeTimeButton.addClass('hide');
         freezeComingButton.removeClass('hide');
-        freezeParagraph.text(`Время начала следующей замарозки перед ${data.tour} туром: ${showDate(data)}. Её можно начать прямо сейчас, нажав на кнопку.`);
+        freezeParagraph.text(`Время начала следующей заморозки перед ${data.tour} туром: ${showDate(data)}. Её можно начать прямо сейчас, нажав на кнопку.`);
     } else if (data.message === 'Danger!') {
         freezeTimeButton.addClass('hide');
         freezeComingButton.addClass('hide');

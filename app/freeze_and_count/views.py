@@ -20,8 +20,8 @@ DEFAULT_CHANGES_COUNT = 3
 
 @staff_member_required
 def render_freeze_and_count(request):
-    tour = get_current_tour()
-    save_players_in_PTT_model(tour)
+    # tour = get_current_tour()
+    # save_players_in_PTT_model(tour)
     return render(request, 'freeze_and_count.html')
 
 
@@ -163,14 +163,14 @@ def count_points(tour):
     current_tour = Tour.objects.get(number=tour, season=YEAR)
     events = Event.objects.filter(match_id__tour_number=current_tour)
     points = dict()
-    players = Player.objects.all()
+    instances_PTT = Players_Team_in_Tour.objects.filter(tour_number=current_tour)
     matches = Game.objects.filter(tour_number=current_tour)
     miss_match_instances = Miss_Match.objects.filter(match_id__tour_number=current_tour)
 
 
     for event in events:
-        if event.player_id.pk == 37:
-            print(event.player_id.club)
+        # if event.player_id.pk == 37:
+        #     print(event.player_id.club)
         if event.kind == 'Goal_Game':
 
             if event.player_id.position == 'GK':
@@ -209,48 +209,91 @@ def count_points(tour):
             loser = match.home_team
         else: bullitt_winner = match.bullitt_winner
 
-        for player in players.filter(Q(club=match.home_team) | Q(club=match.guest_team)):
-            if player.pk == 37:
-                print(player)
-            goals_scored_by_players_team = score[0] if player.club == match.home_team else score[1]
-            goals_miss_by_players_team = score[1] if player.club == match.home_team else score[0]
+        for instance in instances_PTT.filter(Q(club=match.home_team) | Q(club=match.guest_team)):
+            # if player.pk == 37:
+            #     print(player)
+            goals_scored_by_players_team = score[0] if instance.club == match.home_team else score[1]
+            goals_miss_by_players_team = score[1] if instance.club == match.home_team else score[0]
 
-            if not miss_the_match(player, miss_match_instances.filter(match_id=match)):
+            if not miss_the_match(instance.player_id, miss_match_instances.filter(match_id=match)):
 
-                if player.club == winner:
-                    get_or_create_key_and_plus_value(points, player.pk, 3, '+3, team won')
-                elif player.club == loser:
-                    get_or_create_key_and_plus_value(points, player.pk, -1, '-1, team lose')
+                if instance.club == winner:
+                    get_or_create_key_and_plus_value(points, instance.player_id.pk, 3, '+3, team won')
+                elif instance.club == loser:
+                    get_or_create_key_and_plus_value(points, instance.player_id.pk, -1, '-1, team lose')
 
                 if winner == None:
-                    get_or_create_key_and_plus_value(points, player.pk, 1, '+1, draw')
-                    if player.club == bullitt_winner:
-                        get_or_create_key_and_plus_value(points, player.pk, 1, '+1, bullitts won')
+                    get_or_create_key_and_plus_value(points, instance.player_id.pk, 1, '+1, draw')
+                    if instance.club == bullitt_winner:
+                        get_or_create_key_and_plus_value(points, instance.player_id.pk, 1, '+1, bullitts won')
 
                 if goals_miss_by_players_team >= 3:
-                    if player.position == 'GK':
-                        get_or_create_key_and_plus_value(points, player.pk, -3, '-3, team miss 3+ goals GK')
-                    elif player.position == 'DE':
-                        get_or_create_key_and_plus_value(points, player.pk, -2, '-2, team miss 3+ goals DE')
+                    if instance.player_id.position == 'GK':
+                        get_or_create_key_and_plus_value(points, instance.player_id.pk, -3, '-3, team miss 3+ goals GK')
+                    elif instance.player_id.position == 'DE':
+                        get_or_create_key_and_plus_value(points, instance.player_id.pk, -2, '-2, team miss 3+ goals DE')
 
                 if goals_scored_by_players_team >= 5:
-                    if player.position == 'MF':
-                        get_or_create_key_and_plus_value(points, player.pk, 2, '+2, team scored 5+ goals MF')
-                    elif player.position == 'FW':
-                        get_or_create_key_and_plus_value(points, player.pk, 3, '+3, team scored 5+ goals FW')
+                    if instance.player_id.position == 'MF':
+                        get_or_create_key_and_plus_value(points, instance.player_id.pk, 2, '+2, team scored 5+ goals MF')
+                    elif instance.player_id.position == 'FW':
+                        get_or_create_key_and_plus_value(points, instance.player_id.pk, 3, '+3, team scored 5+ goals FW')
 
-                if player.club == winner and goals_miss_by_players_team == 0:
-                    if player.position == 'GK':
-                        get_or_create_key_and_plus_value(points, player.pk, 5, '+5, team won and miss 0 goals GK')
-                    elif player.position == 'DE':
-                        get_or_create_key_and_plus_value(points, player.pk, 3, '+3, team won and miss 0 goals DE')
+                if instance.club == winner and goals_miss_by_players_team == 0:
+                    if instance.player_id.position == 'GK':
+                        get_or_create_key_and_plus_value(points, instance.player_id.pk, 5, '+5, team won and miss 0 goals GK')
+                    elif instance.player_id.position == 'DE':
+                        get_or_create_key_and_plus_value(points, instance.player_id.pk, 3, '+3, team won and miss 0 goals DE')
 
                 if goals_scored_by_players_team == 0 and goals_miss_by_players_team == 0:
-                    if player.position == 'GK' or player.position == 'DE':
-                        get_or_create_key_and_plus_value(points, player.pk, 1, '+1, 0:0 draw GK or DE')
+                    if instance.player_id.position == 'GK' or instance.player_id.position == 'DE':
+                        get_or_create_key_and_plus_value(points, instance.player_id.pk, 1, '+1, 0:0 draw GK or DE')
 
             else:
-                get_or_create_key_and_plus_value(points, player.pk, 0, '0, Miss {}'.format(match))
+                get_or_create_key_and_plus_value(points, instance.player_id.pk, 0, '0, Miss {}'.format(match))
+
+        # for player in players.filter(Q(club=match.home_team) | Q(club=match.guest_team)):
+        #     # if player.pk == 37:
+        #     #     print(player)
+        #     goals_scored_by_players_team = score[0] if player.club == match.home_team else score[1]
+        #     goals_miss_by_players_team = score[1] if player.club == match.home_team else score[0]
+        #
+        #     if not miss_the_match(player, miss_match_instances.filter(match_id=match)):
+        #
+        #         if player.club == winner:
+        #             get_or_create_key_and_plus_value(points, player.pk, 3, '+3, team won')
+        #         elif player.club == loser:
+        #             get_or_create_key_and_plus_value(points, player.pk, -1, '-1, team lose')
+        #
+        #         if winner == None:
+        #             get_or_create_key_and_plus_value(points, player.pk, 1, '+1, draw')
+        #             if player.club == bullitt_winner:
+        #                 get_or_create_key_and_plus_value(points, player.pk, 1, '+1, bullitts won')
+        #
+        #         if goals_miss_by_players_team >= 3:
+        #             if player.position == 'GK':
+        #                 get_or_create_key_and_plus_value(points, player.pk, -3, '-3, team miss 3+ goals GK')
+        #             elif player.position == 'DE':
+        #                 get_or_create_key_and_plus_value(points, player.pk, -2, '-2, team miss 3+ goals DE')
+        #
+        #         if goals_scored_by_players_team >= 5:
+        #             if player.position == 'MF':
+        #                 get_or_create_key_and_plus_value(points, player.pk, 2, '+2, team scored 5+ goals MF')
+        #             elif player.position == 'FW':
+        #                 get_or_create_key_and_plus_value(points, player.pk, 3, '+3, team scored 5+ goals FW')
+        #
+        #         if player.club == winner and goals_miss_by_players_team == 0:
+        #             if player.position == 'GK':
+        #                 get_or_create_key_and_plus_value(points, player.pk, 5, '+5, team won and miss 0 goals GK')
+        #             elif player.position == 'DE':
+        #                 get_or_create_key_and_plus_value(points, player.pk, 3, '+3, team won and miss 0 goals DE')
+        #
+        #         if goals_scored_by_players_team == 0 and goals_miss_by_players_team == 0:
+        #             if player.position == 'GK' or player.position == 'DE':
+        #                 get_or_create_key_and_plus_value(points, player.pk, 1, '+1, 0:0 draw GK or DE')
+        #
+        #     else:
+        #         get_or_create_key_and_plus_value(points, player.pk, 0, '0, Miss {}'.format(match))
 
     return points
 
@@ -340,7 +383,7 @@ def count_and_save_points(request):
         tour_to_count = Tour.objects.get(number=tour, season=YEAR)
         if tour_to_count == get_current_tour():
             if is_freeze_now():
-
+                save_players_in_PTT_model(tour_to_count)
                 points = count_points(tour)
 
                 save_players_results(tour, points)
