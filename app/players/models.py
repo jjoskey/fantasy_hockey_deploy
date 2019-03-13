@@ -225,12 +225,3 @@ class Captain(models.Model):
         unique_together = ['user_id', 'tour_number']
 
 
-class Transfer(models.Model):
-
-    player_id = models.ForeignKey(Player, null=False, blank=False)
-    old_club = models.ForeignKey(Club, null=False, blank=False, help_text='Клуб, из которого ушёл игрок.')
-    tour_number_start = models.ForeignKey(Tour, null=False, blank=False, related_name='Tour_Number_Start', help_text='Тур, в котором игрок начал играть за клуб (если с начала сезона, то ставится 1 тур.')
-    tour_number_end = models.ForeignKey(Tour, null=False, blank=False, related_name='Tour_Number_End', help_text='Тур, в котором игрок сыграл последний матч за клуб')
-
-    def __str__(self):
-        return '{} ушёл из {} в {} туре'.format(str(self.player_id), str(self.old_club), str(self.tour_number_end.number))

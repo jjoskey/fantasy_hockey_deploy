@@ -19,6 +19,9 @@ DEFAULT_CHANGES_COUNT = 3
 
 @staff_member_required
 def render_freeze_and_count(request):
+
+
+
     return render(request, 'freeze_and_count.html')
 
 
@@ -158,8 +161,10 @@ def count_points(tour):
     matches = Game.objects.filter(tour_number=current_tour)
     miss_match_instances = Miss_Match.objects.filter(match_id__tour_number=current_tour)
 
-    for event in events:
 
+    for event in events:
+        if event.player_id.pk == 37:
+            print(event.player_id.club)
         if event.kind == 'Goal_Game':
 
             if event.player_id.position == 'GK':
@@ -199,7 +204,8 @@ def count_points(tour):
         else: bullitt_winner = match.bullitt_winner
 
         for player in players.filter(Q(club=match.home_team) | Q(club=match.guest_team)):
-
+            if player.pk == 37:
+                print(player)
             goals_scored_by_players_team = score[0] if player.club == match.home_team else score[1]
             goals_miss_by_players_team = score[1] if player.club == match.home_team else score[0]
 

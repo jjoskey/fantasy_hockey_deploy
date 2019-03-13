@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Club, Player, Game, Event, Team, Tour, Result_Players, Miss_Match, Result_Profiles, Team_Temporary, Captain, Transfer
+from .models import Club, Player, Game, Event, Team, Tour, Result_Players, Miss_Match, Result_Profiles, Team_Temporary, Captain
 from django.contrib.auth.models import Group, User
 from django.db.models import Q
 
@@ -33,9 +33,7 @@ class EventAdmin(admin.ModelAdmin):
 
     list_display = ['id', 'match_id', 'kind', 'player_id']
 
-class TransferAdmin(admin.ModelAdmin):
 
-    list_display = ['player_id', 'old_club', 'tour_number_start', 'tour_number_end']
 
 #     fields = ['match_id', 'kind', 'player_id']
 #     readonly_fields = ['match_id']
@@ -144,7 +142,7 @@ admin.site.register(Miss_Match, MissMatchAdmin)
 admin.site.register(Result_Players, ResultPlayersAdmin)
 admin.site.register(Team_Temporary, TeamTemporaryAdmin)
 admin.site.register(Captain, CaptainAdmin)
-admin.site.register(Transfer, TransferAdmin)
+
 admin.site.unregister(Group)
 # admin.site.unregister(User)
 admin.site.site_header = 'Russian Fantasy Hockey'
