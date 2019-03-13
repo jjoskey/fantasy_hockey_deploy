@@ -108,7 +108,14 @@ def send_last_freeze(request): #запускается, когда пользо�
 
 @csrf_exempt
 def off_season(request):
-    pass
+    if request.method == 'POST':
+        utc_now = datetime.datetime.now(datetime.timezone.utc)
+        password = json.loads(request.body)
+        if password == 'то самое':
+            print('YES')
+
+        return HttpResponse('OK')
+
 
 
 @csrf_exempt
