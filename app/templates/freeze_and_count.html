@@ -4,11 +4,17 @@
 
     <div class="container">
 
-        <h1>Это страница для заморозки и подсчёта очков.</h1>
+        <h1>Это страница для заморозки и подсчёта очков и всякой всячины.</h1>
         <p>Кстати, она доступна только администраторам. Любое нажатие кнопок может привести к фатальным последствиям.</p>
         <hr>
-        <button id="freeze_time" type="button" class="btn btn-primary hide">Остановить Freeze</button>
-        <button id="freeze_is_coming" type="button" class="btn btn-primary hide">Начать Freeze</button>
+        <div class="row">
+            <div class="d-inline-flex">
+                <div class="p-2">
+                    <button id="freeze_time" type="button" class="btn btn-primary hide">Остановить Freeze</button>
+                    <button id="freeze_is_coming" type="button" class="btn btn-primary hide">Начать Freeze</button>
+                </div>
+            </div>
+        </div>
         <p id="freeze_message"></p>
         <hr>
         <div class="row">
@@ -36,6 +42,30 @@
         </div>
         <p id="not_number_transfers" class="hide">В форме должно быть число.</p>
         <p>Здесь можно добавить трансферы всем пользователям, кроме новых. Укажите количество, и они будут прибавлены к уже имеющимся у игрока трансферам.</p>
+        <hr>
+        <div class="row">
+            <div class="d-inline-flex">
+                <div class="p-2">
+                    <button id="end_season" type="button" class="btn btn-danger">Завершить сезон</button>
+                </div>
+                <div class="p-2">
+                    <input id="capcha" type="text" class="form-control" placeholder="капча">
+                </div>
+            </div>
+        </div>
+        <p id="capcha-mistake" class="hide">Капча неправильная.</p>
+        <p>Здесь можно завершить сезон после того, как все игры сыграны. Но не раньше, иначе произойдёт непоправимое!
+        Чтобы обезопасить от случайного нажатия предусмотрена капча: 123.</p>
+        <hr>
+        <div class="row">
+            <div class="d-inline-flex">
+                <div class="p-2">
+                    <button id="start_season" type="button" class="btn btn-success">Начать сезон</button>
+                </div>
+            </div>
+        </div>
+        <p>Нажатие этой кнопки начинает сезон. Нажать её можно только в межсезонье. Будьте аккуратны! До того, как она нажата пользователь не сможет сформировать команду.
+        Но после - сможет!</p>
         <hr>
     </div>
 
