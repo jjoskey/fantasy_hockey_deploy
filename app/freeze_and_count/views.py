@@ -120,7 +120,13 @@ def off_season(request):
 
 @csrf_exempt
 def start_season(request):
-    pass
+    if request.method == 'POST':
+        utc_now = datetime.datetime.now(datetime.timezone.utc)
+        password = json.loads(request.body)
+        if password == 'то самое':
+            print('YES')
+
+        return HttpResponse('OK')
 
 
 @csrf_exempt

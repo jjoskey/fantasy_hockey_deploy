@@ -44,7 +44,8 @@ const freezeComingButton = $('#freeze_is_coming');
 const freezeParagraph = $('#freeze_message');
 const countButton = $('#count_button');
 const addTransfers = $('#add_transfers');
-const offSeasonButton = $('#end_season')
+const offSeasonButton = $('#end_season');
+const onSeasonButton = $('#start_season');
 
 fetchFreeze().then( data => showButton(data));
 
@@ -64,6 +65,19 @@ offSeasonButton.click(() => {
     } else {
         $('#capcha-mistake').removeClass('hide');
     }
+})
+
+
+onSeasonButton.click(() => {
+    onSeasonButton.attr('disabled', true);
+    let password = 'то самое';
+    fetch('/api_freeze_and_count/off_season/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(password), credentials: 'same-origin' })
+    .then(fetchFreeze).then( data => {
+        showButton(data);
+        $('#start-season-message').removeClass('hide')
+        onSeasonButton.removeAttr('disabled');
+    })
+
 })
 
 
