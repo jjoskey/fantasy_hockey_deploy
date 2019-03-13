@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Club, Player, Game, Event, Team, Tour, Result_Players, Miss_Match, Result_Profiles, Team_Temporary, Captain, Players_Team_in_Tour
+from .models import Club, Player, Game, Event, Team, Tour, Result_Players, Miss_Match, Result_Profiles, Team_Temporary, Captain, Players_Team_in_Tour, Off_Season
 from django.contrib.auth.models import Group, User
 from django.db.models import Q
 
@@ -134,6 +134,10 @@ class PTTAdmin(admin.ModelAdmin):
 
     list_display = ['tour_number', 'player_id', 'club']
 
+class OffSeasonAdmin(admin.ModelAdmin):
+
+    list_display = ['start_time', 'end_time']
+
 admin.site.register(Club, ClubAdmin)
 admin.site.register(Player, PlayerAdmin)
 admin.site.register(Game, GameAdmin)
@@ -146,6 +150,8 @@ admin.site.register(Result_Players, ResultPlayersAdmin)
 admin.site.register(Team_Temporary, TeamTemporaryAdmin)
 admin.site.register(Captain, CaptainAdmin)
 admin.site.register(Players_Team_in_Tour, PTTAdmin)
+admin.site.register(Off_Season, OffSeasonAdmin)
+
 
 admin.site.unregister(Group)
 # admin.site.unregister(User)

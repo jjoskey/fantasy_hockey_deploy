@@ -7,7 +7,7 @@ from django.utils import timezone
 import datetime
 import json
 from django.utils import dateparse
-from players.models import Club, Player, Game, Event, Team, Tour, Result_Players, Miss_Match, Result_Profiles, Team_Temporary, Captain, Players_Team_in_Tour
+from players.models import Club, Player, Game, Event, Team, Tour, Result_Players, Miss_Match, Result_Profiles, Team_Temporary, Captain, Players_Team_in_Tour, Off_Season
 from accounts.models import Profile
 from players.views import DEFAULT_PLAYERS_Q
 from django.db.models import Q
@@ -93,9 +93,6 @@ def get_freeze_data():
 @csrf_exempt
 def send_last_freeze(request): #запускается, когда пользователь заходит на /freeze_and_count/
 
-    tour = get_current_tour()
-    save_captains_to_Captain_model(tour)
-
     # players = Player.objects.all()
     # for player in players:
     #
@@ -105,7 +102,18 @@ def send_last_freeze(request): #запускается, когда пользо�
 
     if request.method == 'GET':
         data_to_send = get_freeze_data()
+        print(data_to_send)
         return JsonResponse(data_to_send, safe=False)
+
+
+@csrf_exempt
+def off_season(request):
+    pass
+
+
+@csrf_exempt
+def start_season(request):
+    pass
 
 
 @csrf_exempt

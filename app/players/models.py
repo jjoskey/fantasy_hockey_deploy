@@ -233,3 +233,10 @@ class Players_Team_in_Tour(models.Model):
 
     class Meta:
         unique_together = ['player_id', 'tour_number', 'club']
+
+
+class Off_Season(models.Model):
+
+    start_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True)
+    end_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True)
+
