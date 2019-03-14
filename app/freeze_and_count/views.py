@@ -145,6 +145,10 @@ def start_season(request):
                     profile.changes_count = 0
                     profile.save()
 
+                for player in Player.objects.all():
+                    player.points = 0
+                    player.save()
+
                 return HttpResponse('OK')
 
 

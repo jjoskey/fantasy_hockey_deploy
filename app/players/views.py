@@ -63,6 +63,14 @@ def save_budget(user, budget):
     current_profile.save()
 
 
+# def get_players_points(player):
+#     points = 0
+#     for instance in Result_Players.objects.filter(player_id=player, tour_number__season=YEAR):
+#         points += instance.points
+#     return points
+
+
+
 def all_players_to_send(temporary_team):
     players = Player.objects.all()
     all_player_data, permission_data = list(), permissions(temporary_team)
@@ -102,9 +110,10 @@ def all_players_to_send(temporary_team):
                 'surname': player.surname,
                 'name': player.name,
                 'position': player.position,
-                'price': player.price
+                'price': player.price,
+                'points': player.points
             }})
-    return all_player_data
+    return sorted(all_player_data, key=lambda x: x['fields']['points'], reverse=True)
 
 
 def users_players_to_send(temporary_team, user):

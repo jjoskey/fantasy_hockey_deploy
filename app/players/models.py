@@ -3,10 +3,14 @@ from accounts.models import Profile
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.core.validators import validate_comma_separated_integer_list
+import datetime
+
+
+YEAR = datetime.datetime.now().year
 
 
 class Tour(models.Model):
-    season = models.PositiveIntegerField(blank=False, null=False, default=2019,
+    season = models.PositiveIntegerField(blank=False, null=False, default=YEAR,
                                          help_text='Год тура')
     number = models.PositiveSmallIntegerField(
         help_text='Номер тура. Если это матч плей-офф, номер всё равно вбивается. Он будет использован, при подсчёте очков.')
@@ -63,7 +67,7 @@ class Player(models.Model):
 
     position = models.CharField(max_length=2, choices=POSITION_CHOICES, blank=False, null=False)
     price = models.FloatField(blank=False, null=False)
-    points = models.IntegerField(blank=False, null=False, default=0, editable=False)
+    points = models.IntegerField(blank=False, null=False, default=0)
 
     def __str__(self):
         return str(self.club) + ', ' + self.surname + ' ' + self.name
@@ -99,6 +103,7 @@ class Game(models.Model):
 
     class Meta:
         unique_together = ['tour_number', 'game_of_tour', 'home_team', 'guest_team']
+
 
 class Event(models.Model):
 
