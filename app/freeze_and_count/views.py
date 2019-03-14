@@ -8,7 +8,7 @@ import datetime
 import json
 from django.utils import dateparse
 from players.models import Club, Player, Game, Event, Team, Tour, Result_Players, Miss_Match, Result_Profiles, Team_Temporary, Captain, Players_Team_in_Tour, Off_Season
-from accounts.models import Profile
+from accounts.models import Profile, DEFAULT_BUDGET
 from players.views import DEFAULT_PLAYERS_Q
 from django.db.models import Q
 from players import views
@@ -133,10 +133,19 @@ def start_season(request):
         utc_now = datetime.datetime.now(datetime.timezone.utc)
         password = json.loads(request.body)
         if password == 'то самое':
-            print('start season')
-            print(is_off_season())
+            if is_off_season():
+                off_season = Off_Season.objects.get(start_time__lt=utc_now, end_time__isnull=True)
+                off_season.end_time = utc_now
+                off_season.save()
 
-        return HttpResponse('OK')
+                profiles = Profile.objects.all()
+                for profile in profiles:
+                    profile.budget = DEFAULT_BUDGET
+                    profile.points = 0
+                    profile.changes_count = 0
+                    profile.save()
+
+            return HttpResponse('OK')
 
 
 @csrf_exempt
