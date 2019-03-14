@@ -71,7 +71,7 @@ offSeasonButton.click(() => {
 onSeasonButton.click(() => {
     onSeasonButton.attr('disabled', true);
     let password = 'то самое';
-    fetch('/api_freeze_and_count/off_season/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(password), credentials: 'same-origin' })
+    fetch('/api_freeze_and_count/start_season/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(password), credentials: 'same-origin' })
     .then(fetchFreeze).then( data => {
         showButton(data);
         $('#start-season-message').removeClass('hide')

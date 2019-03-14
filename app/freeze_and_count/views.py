@@ -112,7 +112,7 @@ def off_season(request):
         utc_now = datetime.datetime.now(datetime.timezone.utc)
         password = json.loads(request.body)
         if password == 'то самое':
-            print('YES')
+            print('off_season')
 
         return HttpResponse('OK')
 
@@ -124,7 +124,7 @@ def start_season(request):
         utc_now = datetime.datetime.now(datetime.timezone.utc)
         password = json.loads(request.body)
         if password == 'то самое':
-            print('YES')
+            print('start season')
 
         return HttpResponse('OK')
 
