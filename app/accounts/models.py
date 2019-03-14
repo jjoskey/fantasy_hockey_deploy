@@ -18,7 +18,7 @@ DEFAULT_BUDGET = 100
 
 class Profile(models.Model):
     user_id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    team_name = models.CharField(max_length=30, null=True, blank=True)
+    team_name = models.CharField(max_length=30, null=True, blank=True, unique=True)
     budget = models.FloatField(default=DEFAULT_BUDGET)
     changes_count = models.PositiveIntegerField(default=0)
     refresh_changes = models.BooleanField(editable=False, default=False)
