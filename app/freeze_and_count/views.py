@@ -145,7 +145,7 @@ def start_season(request):
                     profile.changes_count = 0
                     profile.save()
 
-            return HttpResponse('OK')
+                return HttpResponse('OK')
 
 
 @csrf_exempt
