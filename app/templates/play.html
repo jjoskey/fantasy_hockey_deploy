@@ -1,5 +1,10 @@
 {% extends "base.html" %} {% load staticfiles %} {% block content %}
 
+{% if off_season %}
+<div class="container">
+    <h1>Пацаны, у нас межсезонье. Возвращайтесь, когда сезон начнётся.</h1>
+</div>
+{% else %}
 <div class="container">
     {% if banners %}
         <div class="small_image">
@@ -208,7 +213,7 @@
 
 </div>
 
-
+{% endif %}
 {% endblock %}
 
 {% block script %}

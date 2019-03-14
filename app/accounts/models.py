@@ -7,7 +7,7 @@ from django.dispatch import receiver
 from django.core.mail import EmailMessage
 
 
-DEFAULT_BUDGET = 16
+DEFAULT_BUDGET = 100
 
 
 # class User(auth.models.User, auth.models.PermissionsMixin):

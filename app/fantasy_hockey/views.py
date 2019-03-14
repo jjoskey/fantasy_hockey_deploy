@@ -44,6 +44,7 @@ def render_rules(request):
 def render_play_page(request):
 
     if request.user.is_authenticated():
+        off_season = freeze_and_count.is_off_season()
         current_profile = Profile.objects.get(user_id=request.user)
         if current_profile.team_name:
             utc_now = datetime.datetime.now(datetime.timezone.utc)
@@ -52,7 +53,7 @@ def render_play_page(request):
             except:
                 banners = False
 
-            return render(request, 'play.html', context={'banners': banners})
+            return render(request, 'play.html', context={'banners': banners, 'off_season': off_season})
         else:
             return redirect('accounts:teamname')
     else:

@@ -110,11 +110,20 @@ def send_last_freeze(request): #запускается, когда пользо�
 def off_season(request):
     if request.method == 'POST':
         utc_now = datetime.datetime.now(datetime.timezone.utc)
+        current_tour = get_current_tour()
         password = json.loads(request.body)
         if password == 'то самое':
-            print('off_season')
+            if not is_off_season():
 
-        return HttpResponse('OK')
+                Off_Season.objects.create(start_time=utc_now)
+
+                team_instances = Team.objects.filter(tour_number_end__isnull=True)
+                for instance in team_instances:
+                    instance.tour_number_end = current_tour
+                    instance.save()
+
+
+                return HttpResponse('OK')
 
 
 
@@ -125,6 +134,7 @@ def start_season(request):
         password = json.loads(request.body)
         if password == 'то самое':
             print('start season')
+            print(is_off_season())
 
         return HttpResponse('OK')
 
@@ -480,6 +490,10 @@ def is_first_time(user):
         else:
             return True
 
+
+def is_off_season():
+    utc_now = datetime.datetime.now(datetime.timezone.utc)
+    return Off_Season.objects.filter(start_time__lt=utc_now, end_time__isnull=True).exists()
 
 
 # def recount_start_tour(profile):
