@@ -285,6 +285,19 @@ tbody tr {
     overflow: hidden;
     text-overflow: ellipsis;
     vertical-align: middle;
+
+}
+
+.table_players_all th {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table_players_all td, .table_players_all th {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 
 .play_page_row {
