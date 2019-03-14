@@ -130,7 +130,7 @@ def users_players_to_send(temporary_team, user):
             disable = False
         else:
             disable = True
-            message.append('Freeze Time!')
+            message.append('Дедлайн уже наступил')
     else:
         if is_first_time:
             disable = False
@@ -139,7 +139,7 @@ def users_players_to_send(temporary_team, user):
                 disable = False
             else:
                 disable = True
-                message.append('You have not enough changes')
+                message.append('У вас нет замен')
 
     for player in temporary_team:
         users_players_data.append({
@@ -493,8 +493,6 @@ def make_player_captain(player, user):
     current_profile = Profile.objects.get(user_id=user)
     users_team = Team.objects.filter(user_id=current_profile).exclude(tour_number_end__isnull=False)
     # current_captain = None
-
-
 
     for instance in users_team:
         if instance.is_captain:

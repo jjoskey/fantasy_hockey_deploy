@@ -126,7 +126,6 @@ def off_season(request):
                 return HttpResponse('OK')
 
 
-
 @csrf_exempt
 def start_season(request):
     if request.method == 'POST':
@@ -382,7 +381,7 @@ def save_profiles_results(tour, points):
             result = 0
 
             for instance in Team.objects.filter(user_id=profile).filter(tour_number_start__number__lte=tour_to_count.number)\
-                    .filter(Q(tour_number_end__isnull=True) | Q(tour_number_end__number__gte=tour_to_count.number)): #добавить фильтр по году
+                    .filter(Q(tour_number_end__isnull=True) | Q(tour_number_end__number__gte=tour_to_count.number)):
                 try:
                     result_player = Result_Players.objects.get(player_id=instance.player_id, tour_number=tour_to_count).points
                 except:

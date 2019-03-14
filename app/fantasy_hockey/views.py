@@ -113,7 +113,7 @@ def render_user_team(request, user_id):
     except:
         banners = False
 
-    if len(team_instances) == 11:
+    if len(team_instances) == 11:  # поставить вместо 11 - players.DEFAULT_PLAYERS_Q
         for instance in team_instances:
             instance.player_id.tshirt = choose_tshirt(instance.player_id)
             team[instance.player_id.position].append(instance.player_id)
