@@ -12,6 +12,7 @@ from accounts.models import Profile, DEFAULT_BUDGET
 from players.views import DEFAULT_PLAYERS_Q
 from django.db.models import Q
 from players import views
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 YEAR = datetime.datetime.now().year
@@ -20,7 +21,7 @@ DEFAULT_CHANGES_COUNT = 3
 
 @staff_member_required
 def render_freeze_and_count(request):
-    # tour = get_current_tour()
+        # tour = get_current_tour()
     # save_players_in_PTT_model(tour)
     return render(request, 'freeze_and_count.html')
 
@@ -90,6 +91,7 @@ def get_freeze_data():
     return data_to_send
 
 
+@staff_member_required
 @csrf_exempt
 def send_last_freeze(request): #запускается, когда пользователь заходит на /freeze_and_count/
 
@@ -106,6 +108,7 @@ def send_last_freeze(request): #запускается, когда пользо�
         return JsonResponse(data_to_send, safe=False)
 
 
+@staff_member_required
 @csrf_exempt
 def off_season(request):
     if request.method == 'POST':
@@ -126,6 +129,7 @@ def off_season(request):
                 return HttpResponse('OK')
 
 
+@staff_member_required
 @csrf_exempt
 def start_season(request):
     if request.method == 'POST':
@@ -151,6 +155,7 @@ def start_season(request):
                 return HttpResponse('OK')
 
 
+@staff_member_required
 @csrf_exempt
 def receive_freeze_data(request):
 
@@ -418,6 +423,8 @@ def save_point_in_players_model():
         player.save()
 
 
+
+@staff_member_required
 @csrf_exempt
 def count_and_save_points(request):
 
@@ -449,6 +456,7 @@ def count_and_save_points(request):
             return JsonResponse(points, safe=False)
 
 
+@staff_member_required
 @csrf_exempt
 def add_changes_using_data(request):
 
