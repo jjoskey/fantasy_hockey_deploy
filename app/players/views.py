@@ -53,7 +53,7 @@ def permissions(players):
         data_to_return['positions'][player.position] += 1
         data_to_return['avaliable_budget'] -= player.price
         data_to_return['avaliable_budget'] = round(data_to_return['avaliable_budget'], 1)
-        print(player.price, data_to_return['avaliable_budget'])
+        # print(player.price, data_to_return['avaliable_budget'])
         data_to_return['players_quantity'] += 1
 
     return data_to_return
