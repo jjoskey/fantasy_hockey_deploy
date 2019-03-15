@@ -115,7 +115,7 @@ def all_players_to_send(temporary_team):
                 'price': player.price,
                 'points': player.points
             }})
-    return sorted(all_player_data, key=lambda x: x['fields']['points'], reverse=True)
+    return sorted(all_player_data, key=lambda x: (x['fields']['points'], x['fields']['price']), reverse=True)
     # return all_player_data
 
 def users_players_to_send(temporary_team, user):
