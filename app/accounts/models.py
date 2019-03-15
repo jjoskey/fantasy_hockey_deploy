@@ -30,7 +30,8 @@ class Profile(models.Model):
             Profile.objects.create(user_id=instance)
             email = EmailMessage(
                 'Вы успешно зарегистрировались',
-                'Спасибо за регистрацию, ваше имя пользователя: {}, обязательно ознакомьтесь с правилами: https://fantasyhockey.ru/rules/.'.format(instance.username),
+                'Спасибо за регистрацию, ваше имя пользователя: {}, обязательно ознакомьтесь с правилами: https://fantasyhockey.ru/rules/.\n'
+                'Войти можно здесь: https://fantasyhockey.ru/accounts/login/'.format(instance.username),
                 to=[instance.email]
             )
             email.send()

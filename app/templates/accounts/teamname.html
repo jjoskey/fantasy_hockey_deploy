@@ -4,7 +4,8 @@
 
 {% block content %}
 <div class="container">
-    <h1>Введите имя своей команды:</h1>
+    <h1>Придумайте имя для своей команды</h1>
+    <p>После этого, можно будет приступить к выбору игроков.</p>
     <form method="POST">
         {% csrf_token %}
         {{ form|crispy }}

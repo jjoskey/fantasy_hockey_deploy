@@ -68,8 +68,12 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ('team_name',)
 
+
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.fields['team_name'].label = None
 
 
 # class ChangePasswordForm(forms.ModelForm):

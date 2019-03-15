@@ -492,3 +492,7 @@ h4 {
     }
 
 }
+
+label[for="id_team_name"] {
+    display:none;
+}

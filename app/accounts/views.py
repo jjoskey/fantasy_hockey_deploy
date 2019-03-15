@@ -20,9 +20,12 @@ def password_generator():
     return ''.join(random.choices(string.ascii_letters + string.digits, k=6))
 
 
+def success_signup(request):
+    return render(request, 'accounts/signup_success.html')
+
 class SignUp(CreateView):
     form_class = forms.UserCreateForm
-    success_url = reverse_lazy("accounts:login")
+    success_url = reverse_lazy("accounts:success")
     template_name = "accounts/signup.html"
 
 
