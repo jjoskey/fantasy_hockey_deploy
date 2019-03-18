@@ -45,7 +45,7 @@
                         {% else %}
                             <div class="team_names">{{ game.home_team }} — {{ game.guest_team }}</div>
                             <div class="scores zero-score">–:–</div>
-                            <div class="start_time">Начало: <span class="time" data-time="{{ game.start_time|date:"Y-m-d\TH:i:sO" }}"></span></div>
+                            <div class="start_time">Начало: <span class="time" data-time="{{ game.start_time|date:'c' }}"></span></div>
                         {% endif %}
                     </div>
                 {% endfor %}
