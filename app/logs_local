@@ -1,0 +1,32 @@
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.003) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.001) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+(0.002) SELECT "players_tour"."id", "players_tour"."season", "players_tour"."number", "players_tour"."name", "players_tour"."start_time", "players_tour"."supposed_end_time", "players_tour"."end_time" FROM "players_tour"; args=()
+(0.000) SELECT "players_tour"."id", "players_tour"."season", "players_tour"."number", "players_tour"."name", "players_tour"."start_time", "players_tour"."supposed_end_time", "players_tour"."end_time" FROM "players_tour"; args=()
+(0.000) SELECT "players_game"."id", "players_game"."tour_number_id", "players_game"."game_of_tour", "players_game"."home_team_id", "players_game"."guest_team_id", "players_game"."score", "players_game"."bullitt_winner_id", "players_game"."start_time" FROM "players_game" WHERE "players_game"."tour_number_id" = 11; args=(11,)
+(0.001) SELECT "players_club"."id", "players_club"."name" FROM "players_club" WHERE "players_club"."id" = 5; args=(5,)
+(0.000) SELECT "players_club"."id", "players_club"."name" FROM "players_club" WHERE "players_club"."id" = 9; args=(9,)
+(0.000) SELECT "players_club"."id", "players_club"."name" FROM "players_club" WHERE "players_club"."id" = 5; args=(5,)
+(0.000) SELECT "players_club"."id", "players_club"."name" FROM "players_club" WHERE "players_club"."id" = 9; args=(9,)
+(0.000) SELECT "players_club"."id", "players_club"."name" FROM "players_club" WHERE "players_club"."id" = 5; args=(5,)
+(0.000) SELECT "players_club"."id", "players_club"."name" FROM "players_club" WHERE "players_club"."id" = 5; args=(5,)
+(0.000) SELECT "players_club"."id", "players_club"."name" FROM "players_club" WHERE "players_club"."id" = 9; args=(9,)
+(0.000) SELECT "players_club"."id", "players_club"."name" FROM "players_club" WHERE "players_club"."id" = 6; args=(6,)
+(0.000) SELECT "players_club"."id", "players_club"."name" FROM "players_club" WHERE "players_club"."id" = 7; args=(7,)
+"GET / HTTP/1.1" 200 5934
+"GET /static/css/master.css HTTP/1.1" 200 7511
+"GET /static/images/logo_hat.png HTTP/1.1" 200 2439
+"GET /static/script/index.js HTTP/1.1" 200 821
+"GET /static/images/logo_main.png HTTP/1.1" 200 126832
+(0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+(0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
