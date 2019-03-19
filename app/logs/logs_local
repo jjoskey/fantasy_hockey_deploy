@@ -1,0 +1,26 @@
+"GET / HTTP/1.1" 200 5935
+"GET /admin/ HTTP/1.1" 200 12873
+"GET /admin/ HTTP/1.1" 200 12873
+"GET /freeze_and_count/ HTTP/1.1" 200 7348
+"GET /static/script/freeze_and_count.js HTTP/1.1" 304 0
+"GET /api_freeze_and_count/send_last_freeze/ HTTP/1.1" 200 74
+Internal Server Error: /api_freeze_and_count/count_and_save_points/
+Traceback (most recent call last):
+  File "C:\Programming\hf_project\venv\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Programming\hf_project\venv\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Programming\hf_project\venv\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Programming\hf_project\venv\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\Programming\hf_project\venv\lib\site-packages\django\views\decorators\csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Programming\hf_project\fantasy_hockey_deploy\app\freeze_and_count\views.py", line 433, in count_and_save_points
+    tour_to_count = Tour.objects.get(number=tour, season=YEAR)
+  File "C:\Programming\hf_project\venv\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Programming\hf_project\venv\lib\site-packages\django\db\models\query.py", line 379, in get
+    self.model._meta.object_name
+players.models.DoesNotExist: Tour matching query does not exist.
+"POST /api_freeze_and_count/count_and_save_points/ HTTP/1.1" 500 87145
