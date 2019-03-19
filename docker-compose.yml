@@ -8,6 +8,7 @@ services:
     volumes:
       - /var/log/app:/var/log/supervisor
       - /var/log/app/nginx:/var/log/nginx
+      - /var/log/app/django:/home/docker/code/app/logs_prod
     restart: always
     depends_on:
       - db    
