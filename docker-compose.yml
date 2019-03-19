@@ -4,10 +4,11 @@ services:
   web: 
     build: .
     ports:
-      - 80:80
+      - 81:80
     volumes:
       - /var/log/app:/var/log/supervisor
       - /var/log/app/nginx:/var/log/nginx
+      - /var/log/app/uwsgi:/var/log/uwsgi
     restart: always
     depends_on:
       - db    
