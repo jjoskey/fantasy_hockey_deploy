@@ -24,3 +24,14 @@ Traceback (most recent call last):
     self.model._meta.object_name
 players.models.DoesNotExist: Tour matching query does not exist.
 "POST /api_freeze_and_count/count_and_save_points/ HTTP/1.1" 500 87145
+"GET / HTTP/1.1" 200 5934
+"GET /static/css/master.css HTTP/1.1" 200 7511
+"GET /static/images/logo_hat.png HTTP/1.1" 200 2439
+"GET /static/script/index.js HTTP/1.1" 200 821
+"GET /static/images/logo_main.png HTTP/1.1" 200 126832
+"GET /leaders/ HTTP/1.1" 200 3220
+"GET /static/script/leaders.js HTTP/1.1" 200 298
+"GET /accounts/condtitons/ HTTP/1.1" 302 0
+"GET /accounts/login/ HTTP/1.1" 200 4265
+"GET /accounts/condtitons/ HTTP/1.1" 302 0
+"GET /accounts/login/ HTTP/1.1" 200 4265

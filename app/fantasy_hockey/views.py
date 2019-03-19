@@ -108,6 +108,7 @@ def render_user_team(request, user_id):
     team = {'GK': [], 'DE': [], 'MF': [], 'FW': []}
     last_3_results = players.get_results_of_3_last_tours(user)
     utc_now = datetime.datetime.now(datetime.timezone.utc)
+    captain = False
     try:
         banners = AdBanners.objects.get(start_time__lte=utc_now, end_time__gte=utc_now)
     except:
@@ -117,11 +118,19 @@ def render_user_team(request, user_id):
         for instance in team_instances:
             instance.player_id.tshirt = choose_tshirt(instance.player_id)
             team[instance.player_id.position].append(instance.player_id)
+            if instance.is_captain:
+                captain = instance.player_id
+
+
         # print(team)
         # print(profile.user_id.username)
         # print(profile.points)
 
-        return render(request, 'users_team.html', context={'team': team, 'name': profile.team_name, 'points': profile.points, 'results': last_3_results, 'banners': banners})
+        for p in team['GK']:
+            if p == captain:
+                print('yES!')
+
+        return render(request, 'users_team.html', context={'team': team, 'name': profile.team_name, 'points': profile.points, 'results': last_3_results, 'banners': banners, 'captain': captain})
     else:
         return HttpResponseNotFound(f'<h1>У такого пользователя нет команды, или что-то пошло не так...</h1>')
 

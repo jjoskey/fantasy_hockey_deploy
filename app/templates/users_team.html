@@ -58,8 +58,12 @@
                     <div class="forward zone">
                         {% for player in team.FW %}
 
+
                             <div class="player disabled">
                                 <img class="player_image" src="{% static '' %}{{ player.tshirt }}" alt="player_image">
+                                {% if player == captain %}
+                                    <img class="player_image" src="{% static 'images/play/bandage_test.png' %}" alt="player">
+                                {% endif %}
                                 <p class="font-weight-light player_sign">{{ player.surname }}</p>
                             </div>
 
@@ -71,6 +75,9 @@
 
                             <div class="player disabled">
                                 <img class="player_image" src="{% static '' %}{{ player.tshirt }}" alt="player_image">
+                                {% if player == captain %}
+                                    <img class="player_image" src="{% static 'images/play/bandage_test.png' %}" alt="player">
+                                {% endif %}
                                 <p class="font-weight-light player_sign">{{ player.surname }}</p>
                             </div>
 
@@ -82,6 +89,9 @@
 
                             <div class="player disabled">
                                 <img class="player_image" src="{% static '' %}{{ player.tshirt }}" alt="player_image">
+                                {% if player == captain %}
+                                    <img class="player_image" src="{% static 'images/play/bandage_test.png' %}" alt="player">
+                                {% endif %}
                                 <p class="font-weight-light player_sign">{{ player.surname }}</p>
                             </div>
 
@@ -91,6 +101,9 @@
 
                         <div class="player disabled">
                             <img class="player_image" src="{% static '' %}{{ team.GK.0.tshirt }}" alt="player_image">
+                            {% if team.GK.0 == captain %}
+                                <img class="player_image" src="{% static 'images/play/bandage_test.png' %}" alt="player">
+                            {% endif %}
                             <p class="font-weight-light player_sign">{{ team.GK.0.surname }}</p>
                         </div>
 
