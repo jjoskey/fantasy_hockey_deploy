@@ -9,7 +9,7 @@ services:
       - /var/log/app:/var/log/supervisor
       - /var/log/app/nginx:/var/log/nginx
       - /var/log/app/uwsgi:/var/log/uwsgi
-#      - /var/log/app/django/logs_prod:/home/docker/code/app/logs_prod
+      - /var/log/app/django:/home/docker/code/app/logs
     restart: always
     depends_on:
       - db    
