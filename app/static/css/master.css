@@ -496,3 +496,28 @@ h4 {
 label[for="id_team_name"] {
     display:none;
 }
+
+.sponsors {
+    text-align: center;
+}
+
+.developer {
+    height: 100%;
+    position: relative;
+}
+
+.developer-p {
+    position: absolute;
+    font-size: 12px;
+    color: #4b4b4b;
+    bottom: 0;
+    right: 0;
+}
+
+.footer-container {
+    height: 100%;
+}
+
+.footer-row {
+    height: 100%;
+}

@@ -60,7 +60,19 @@
     {% endblock %}
 
     <div class="footer">
-        <p class="text-center"></p>
+        <div class="container footer-container">
+            <div class="row align-items-center footer-row">
+                <div class="col-6 col-sm-6 social">
+                    <a href="https://vk.com/dinamo_ekb" target="_blank"><img src="{% static 'images/footer/vk.png' %}" alt="vk"></a>
+                    <a href="https://www.facebook.com/dinamoekb/" target="_blank"><img src="{% static 'images/footer/fb.png' %}" alt="vk"></a>
+                    <a href="https://www.instagram.com/dinamoekb/" target="_blank"><img src="{% static 'images/footer/inst.png' %}" alt="vk"></a>
+                </div>
+                <div class="col-6 col-sm-6 sponsors">
+                    <a href="http://dinamo-ekb.ru/" target="_blank"><img src="{% static 'images/footer/dynamo.png' %}" alt="vk"></a>
+                </div>
+
+            </div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
