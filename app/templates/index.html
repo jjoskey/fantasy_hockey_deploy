@@ -8,6 +8,35 @@
 
 
     <div class="container">
+        {% if banners %}
+        <div class="small_image">
+            <div class="banner-div">
+                {% if banners.link %}
+                    <a href="{{ banners.link }}" target="_blank"><img class="banner" src="{{ banners.small_image.url }}" alt="small_banner"></a>
+                {% else %}
+                    <img class="banner" src="{{ banners.small_image.url }}" alt="small_banner">
+                {% endif %}
+            </div>
+        </div>
+        <div class="medium_image">
+            <div class="banner-div">
+                {% if banners.link %}
+                    <a href="{{ banners.link }}" target="_blank"><img class="banner" src="{{ banners.medium_image.url }}" alt="small_banner"></a>
+                {% else %}
+                    <img class="banner" src="{{ banners.medium_image.url }}" alt="medium_banner">
+                {% endif %}
+            </div>
+        </div>
+        <div class="large_image">
+            <div class="banner-div">
+                {% if banners.link %}
+                    <a href="{{ banners.link }}" target="_blank"><img class="banner" src="{{ banners.large_image.url }}" alt="small_banner"></a>
+                {% else %}
+                    <img class="banner" src="{{ banners.large_image.url }}" alt="large_banner">
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
         <div class="row align-items-center">
             <div class="col-12 col-md-6 text-align-center">
                 <h2 class="text-main">Добро пожаловать в Российскую Fantasy Лигу по хоккею на траве.</h2>

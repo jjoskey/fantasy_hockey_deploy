@@ -44,6 +44,7 @@ def render_rules(request):
 def render_play_page(request):
 
     if request.user.is_authenticated():
+        last_3_results = players.get_results_of_3_last_tours(request.user)
         off_season = freeze_and_count.is_off_season()
         current_profile = Profile.objects.get(user_id=request.user)
         if current_profile.team_name:
@@ -53,7 +54,7 @@ def render_play_page(request):
             except:
                 banners = False
 
-            return render(request, 'play.html', context={'banners': banners, 'off_season': off_season})
+            return render(request, 'play.html', context={'banners': banners, 'off_season': off_season, 'results': last_3_results})
         else:
             return redirect('accounts:teamname')
     else:
@@ -127,9 +128,6 @@ def render_user_team(request, user_id):
         # print(profile.user_id.username)
         # print(profile.points)
 
-        for p in team['GK']:
-            if p == captain:
-                print('yES!')
 
         return render(request, 'users_team.html', context={'team': team, 'name': profile.team_name, 'points': profile.points, 'results': last_3_results, 'banners': banners, 'captain': captain})
     else:
@@ -151,5 +149,10 @@ def render_home_page(request):
 
     if previous_tour:
         pt_games = Game.objects.filter(tour_number=previous_tour)
-
-    return render(request, 'index.html', context={'ct_games': ct_games, 'pt_games': pt_games, 'current_tour': current_tour, 'previous_tour': previous_tour})
+    utc_now = datetime.datetime.now(datetime.timezone.utc)
+    try:
+        banners = AdBanners.objects.get(start_time__lte=utc_now, end_time__gte=utc_now)
+    except:
+        banners = False
+    print(banners)
+    return render(request, 'index.html', context={'ct_games': ct_games, 'pt_games': pt_games, 'current_tour': current_tour, 'previous_tour': previous_tour, 'banners': banners})

@@ -182,9 +182,16 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6 hide">
-                    <ul id="last_3_result">Очки за ближайшие туры:</ul>
-                </div>
+                {% if results %}
+                    <div class="col-6 hide">
+                        <ul id="last_3_result">
+                        Очки за ближайшие туры:
+                        {% for key, value in results.items %}
+                            <li>{{ key }} тур: {{ value }}</li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
             </div>
 
             <!--<ul class="players-list">-->

@@ -308,12 +308,10 @@ function cancelButtonHide(data) {
 }
 
 
-function renderLast3Result(data) {
-    if (Object.keys(data.last_3_result).length) {
+function showLast3Result() {
+    const last3Results = $('#last_3_result');
+    if (last3Results.children().length > 0) {
         $('#last_3_result').parent().removeClass('hide');
-        for (key in data.last_3_result) {
-            $('#last_3_result').append(`<li>${key} тур: ${data.last_3_result[key]}`)
-        }
     }
 }
 
@@ -458,7 +456,7 @@ function useRecievedData(data) {
     chooseCaptain(data);
     hidingElementsForCaptainChoosing(data);
     showTourData(data);
-    renderLast3Result(data);
+    showLast3Result();
 }
 
 window.onresize = resizePlayerSign
