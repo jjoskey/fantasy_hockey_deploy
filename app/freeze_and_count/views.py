@@ -360,6 +360,7 @@ def save_captains_to_Captain_model(tour):
     for profile in profiles:
         try:
             player = Team.objects.get(user_id=profile, tour_number_end__isnull=True, tour_number_start__number__lte=tour.number, is_captain=True).player_id
+            print(profile, player)
             # print(player)
         except:
             # print(profile)
@@ -372,7 +373,7 @@ def save_profiles_results(tour, points):
     profiles = Profile.objects.all()
     tour_to_count = Tour.objects.get(number=tour, season=YEAR)
     if tour_to_count == get_current_tour():
-        save_captains_to_Captain_model(tour)
+        save_captains_to_Captain_model(tour_to_count)
     captains = Captain.objects.filter(tour_number=tour_to_count)
 
     for profile in profiles:
