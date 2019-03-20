@@ -355,15 +355,13 @@ def save_players_results(tour, points):
         Result_Players.objects.update_or_create(player_id=current_player, tour_number=current_tour, defaults={'points': value['points']})
 
 
-def save_captains_to_Captain_model(tour):
+def save_captains_to_captain_model(tour):
     profiles = Profile.objects.all()
     for profile in profiles:
         try:
-            player = Team.objects.get(user_id=profile, tour_number_end__isnull=True, tour_number_start__number__lte=tour.number, is_captain=True).player_id
-            print(profile, player)
-            # print(player)
+            instance_team = Team.objects.get(user_id=profile, tour_number_end__isnull=True, tour_number_start__number__lte=tour.number, is_captain=True)
+            player = instance_team.player_id
         except:
-            # print(profile)
             continue
         Captain.objects.update_or_create(user_id=profile, tour_number=tour, player_id=player)
 
@@ -435,7 +433,7 @@ def count_and_save_points(request):
             if is_freeze_now():
                 save_players_in_PTT_model(tour_to_count)
                 points = count_points(tour)
-                save_captains_to_Captain_model(tour_to_count)
+                save_captains_to_captain_model(tour_to_count)
                 save_players_results(tour, points)
                 save_profiles_results(tour, points)
                 save_point_in_profile_model()
