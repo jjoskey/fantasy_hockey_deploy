@@ -372,8 +372,7 @@ def save_profiles_results(tour, points):
 
     profiles = Profile.objects.all()
     tour_to_count = Tour.objects.get(number=tour, season=YEAR)
-    if tour_to_count == get_current_tour():
-        save_captains_to_Captain_model(tour_to_count)
+
     captains = Captain.objects.filter(tour_number=tour_to_count)
 
     for profile in profiles:
@@ -436,7 +435,7 @@ def count_and_save_points(request):
             if is_freeze_now():
                 save_players_in_PTT_model(tour_to_count)
                 points = count_points(tour)
-
+                save_captains_to_Captain_model(tour_to_count)
                 save_players_results(tour, points)
                 save_profiles_results(tour, points)
                 save_point_in_profile_model()
