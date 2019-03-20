@@ -224,7 +224,7 @@ def count_points(tour):
             if event.player_id.position == 'GK':
                 get_or_create_key_and_plus_value(points, event.player_id.pk, 10, '+10, goal by GK')
             elif event.player_id.position == 'DE':
-                get_or_create_key_and_plus_value(points, event.player_id.pk, 6, '+6, goal by FW')
+                get_or_create_key_and_plus_value(points, event.player_id.pk, 6, '+6, goal by DE')
             elif event.player_id.position == 'MF':
                 get_or_create_key_and_plus_value(points, event.player_id.pk, 5, '+5, goal by MF')
             elif event.player_id.position == 'FW':
