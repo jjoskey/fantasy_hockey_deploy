@@ -365,7 +365,7 @@ def save_captains_to_Captain_model(tour):
         except:
             # print(profile)
             continue
-        Captain.objects.update_or_create(user_id=profile, tour_number=tour, defaults={'player_id': player})
+        Captain.objects.update_or_create(user_id=profile, tour_number=tour, player_id=player)
 
 
 def save_profiles_results(tour, points):
