@@ -21,6 +21,7 @@ DEFAULT_CHANGES_COUNT = 3
 
 @staff_member_required
 def render_freeze_and_count(request):
+    print(request.COOKIES)
         # tour = get_current_tour()
     # save_players_in_PTT_model(tour)
     return render(request, 'freeze_and_count.html')
