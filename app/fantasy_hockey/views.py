@@ -102,7 +102,7 @@ def choose_tshirt(player_id):
 
 
 def render_user_team(request, user_id):
-    print('YESSS!!!')
+
     profile = Profile.objects.get(pk=user_id)
     user = User.objects.get(pk=user_id)
     team_instances = Team.objects.filter(user_id=profile, tour_number_end__isnull=True)
