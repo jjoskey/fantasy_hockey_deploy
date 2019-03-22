@@ -72,7 +72,6 @@ def save_budget(user, budget):
 #     return points
 
 
-
 def all_players_to_send(temporary_team):
     players = Player.objects.all()
     all_player_data, permission_data = list(), permissions(temporary_team)
@@ -116,7 +115,7 @@ def all_players_to_send(temporary_team):
                 'points': player.points
             }})
     return sorted(all_player_data, key=lambda x: (x['fields']['points'], x['fields']['price']), reverse=True)
-    # return all_player_data
+
 
 def users_players_to_send(temporary_team, user):
 
@@ -186,10 +185,10 @@ def inf_for_cancel_button(user):
 
 def captain_stage(user):
     current_profile = Profile.objects.get(user_id=user)
-
+    utc_now = datetime.datetime.now(datetime.timezone.utc)
     users_team = Team.objects.filter(user_id=current_profile).exclude(tour_number_end__isnull=False)
     is_captain = users_team.filter(user_id=current_profile, is_captain=True).exclude(tour_number_end__isnull=False).exists()
-
+    team_temp = Team_Temporary.objects.filter(user_id=current_profile, timeout__gt=utc_now).exists()
 
     if freeze_and_count.is_freeze_now():
         if freeze_and_count.is_first_time(user):
@@ -199,7 +198,7 @@ def captain_stage(user):
                 return 'freeze'
             else:
                 next_tour = freeze_and_count.get_next_tour()
-                new_user = True
+
                 for instance in users_team:
                     if instance.tour_number_start != next_tour:
                         return 'freeze'
@@ -211,6 +210,8 @@ def captain_stage(user):
         if freeze_and_count.is_first_time(user):
             return 'wait_for_team'
         else:
+            if team_temp:
+                return 'wait_for_team'
             if is_captain:
                 return 'can_choose_another'
             else:
