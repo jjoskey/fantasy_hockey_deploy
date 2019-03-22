@@ -51,7 +51,7 @@
 
             {% for user in users %}
                 {% if off_season %}
-                    <tr class="user_row" style="pointer-events: none; cursor: default;"></tr>
+                    <tr class="user_row" style="pointer-events: none; cursor: default;">
                 {% else %}
                     <tr class="user_row" data-user-id="{{ user.pk }}">
                 {% endif %}
