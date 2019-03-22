@@ -50,15 +50,19 @@
             {% endif %}
 
             {% for user in users %}
-
+                {% if off_season %}
+                    <tr class="user_row" style="pointer-events: none"></tr>
+                {% else %}
                     <tr class="user_row" data-user-id="{{ user.pk }}">
+                {% endif %}
 
-                        <td class="cell_centerize">{{ forloop.counter }}</td>
-                        <td>{{ user.user_id.username }}</td>
-                        <td>{{ user.team_name }}</td>
-                        <td class="cell_centerize">{{ user.points }}</td>
 
-                    </tr>
+                    <td class="cell_centerize">{{ forloop.counter }}</td>
+                    <td>{{ user.user_id.username }}</td>
+                    <td>{{ user.team_name }}</td>
+                    <td class="cell_centerize">{{ user.points }}</td>
+
+                </tr>
 
             {% endfor %}
 

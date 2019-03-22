@@ -62,6 +62,7 @@ def render_play_page(request):
 
 
 def render_leaders(request):
+    off_season = freeze_and_count.is_off_season()
     users = Profile.objects.filter(points__gt=0).order_by('-points')
     position = False
     points = False
@@ -82,7 +83,7 @@ def render_leaders(request):
     except:
         banners = False
 
-    return render(request, 'leaders.html', context={'users': users, 'position': position, 'points': points, 'banners': banners})
+    return render(request, 'leaders.html', context={'users': users, 'position': position, 'points': points, 'banners': banners, 'off_season': off_season})
 
 
 def choose_tshirt(player_id):

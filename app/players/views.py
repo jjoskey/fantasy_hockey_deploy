@@ -264,27 +264,7 @@ def collect_data(user):
 @csrf_exempt
 def send_players_list(request): #фукнция, которая вызывается при отрисовке на странице play.html
 
-    # email = EmailMessage('Test', 'Test Testov Yo', to=['alexander.s.ilyin@gmail.com'])
-    # email.send()
-
-    # player = Player.objects.get(pk=27)
-    # print(player)
-    # make_player_captain(player, request.user)
-    # captain_stage(request.user)
-    # c = Team.objects.get(user_id__user_id=request.user, is_captain=True, tour_number_end__isnull=True)
-    # print(c.player_id.pk)
-    # get_results_of_3_last_tours(request.user)
-    # player = Player.objects.get(pk=37)
-    profile = Profile.objects.get(user_id=request.user)
-    tour = freeze_and_count.get_current_tour()
-    captains = Captain.objects.filter(tour_number=tour)
-    try:
-        captain = captains.get(user_id=profile)
-    except:
-        captain = None
-    # print(captain.player_id == player)
-    # print(captain.player_id)
-    if request.method == 'GET':
+    if request.method == 'GET':  #safety
         data_to_send = collect_data(request.user)
 
         return JsonResponse(data_to_send, safe=False)
@@ -345,7 +325,7 @@ def transform_change_count(profile, delta):
 
 
 @csrf_exempt
-def receive_player_id_to_add(request):
+def receive_player_id_to_add(request):  #safety
     if request.method == 'POST':
         player_id = json.loads(request.body)
         # print(player_id)
@@ -357,7 +337,7 @@ def receive_player_id_to_add(request):
 
 
 @csrf_exempt
-def receive_player_id_to_unactivate(request):
+def receive_player_id_to_unactivate(request):  #safety
     if request.method == 'POST':
 
         player = Player.objects.get(pk=json.loads(request.body))
@@ -368,7 +348,7 @@ def receive_player_id_to_unactivate(request):
 
 
 @csrf_exempt
-def receive_captains_id(request):
+def receive_captains_id(request):  #safety
     player = Player.objects.get(pk=json.loads(request.body))
     make_player_captain(player, request.user)
     return HttpResponse('OK')
@@ -401,7 +381,7 @@ def unactivate_player_in_temporary_team_if_received(player, user):
 
 
 @csrf_exempt
-def save_team(request):
+def save_team(request):  #safety
     if request.method == 'POST':
         save_users_in_team_model(request.user)
         return HttpResponse('OK')
@@ -410,7 +390,7 @@ def save_team(request):
 
 @csrf_exempt
 def cancel_transfers(request):
-    if request.method == 'POST':
+    if request.method == 'POST':  #safety
         utc_now = datetime.datetime.now(datetime.timezone.utc)
         instances_in_temp_team = Team_Temporary.objects.filter(user_id__user_id=request.user, timeout__gt=utc_now)
         current_profile = Profile.objects.get(user_id=request.user)
