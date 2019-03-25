@@ -10,6 +10,7 @@ services:
       - /var/log/app/nginx:/var/log/nginx
       - /var/log/app/uwsgi:/var/log/uwsgi
       - /var/log/app/django:/home/docker/code/app/logs
+      - /var/www/fh-media:/home/docker/code/app/media
     restart: always
     depends_on:
       - db    
