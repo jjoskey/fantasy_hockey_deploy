@@ -106,7 +106,7 @@
                 <div>
                     <h5>Здесь вы можете выбрать игроков для своей команды</h5>
                 </div>
-
+                <p id="budget"></p>
                 <div class="input-group mb-3">
                     <select class="custom-select" id="selectClub">
                         <!--<option selected>Клуб</option>-->
@@ -161,27 +161,24 @@
 
             <div class="row">
                 <div class="col-6">
-                    <p id="budget"></p>
-                </div>
-                <div class="col-6">
                     <p id="changes"></p>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-6 hide">
                     <p id="tour"></p>
                 </div>
                 <div class="col-6 hide">
                     <p id="tour_name"></p>
                 </div>
+
+            </div>
+            <div class="row">
+
                 <div class="col-6 hide">
                     <p id="deadline"></p>
                 </div>
                 <div class="col-6 hide">
                     <p id="deadline_end"></p>
                 </div>
-            </div>
-            <div class="row">
                 {% if results %}
                     <div class="col-6 hide">
                         <ul id="last_3_result">

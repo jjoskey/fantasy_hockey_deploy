@@ -335,10 +335,17 @@ tbody tr {
     color: lightgray;
 }
 
-#budget, #changes, #deadline, #deadline_end, #tour, #tour_name, #user_name, #points {
+#changes, #deadline, #deadline_end, #tour, #tour_name, #user_name, #points {
     font-size: 0.75rem;
     font-weight: bold;
     color: black;
+}
+
+#budget {
+    font-size: 1rem;
+    font-weight: bold;
+    color: black;
+    text-align: center;
 }
 
 .captain-icon {
