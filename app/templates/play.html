@@ -2,7 +2,7 @@
 
 {% if off_season %}
 <div class="container">
-    <h1>Пацаны, у нас межсезонье. Возвращайтесь, когда сезон начнётся.</h1>
+    <h1>У нас сейчас межсезонье. Возвращайтесь, перед началом следующего сезона. Уже скучаем )</h1>
 </div>
 {% else %}
 <div class="container">
@@ -185,7 +185,7 @@
                 {% if results %}
                     <div class="col-6 hide">
                         <ul id="last_3_result">
-                        Очки за ближайшие туры:
+                        Очки за предыдущие туры:
                         {% for key, value in results.items %}
                             <li>{{ key }} тур: {{ value }}</li>
                         {% endfor %}

@@ -62,7 +62,8 @@ function renderAllPlayers(data) {
 //            console.log('yes');
 //            console.log(event.target.parentElement)
             if (!e.target.parentElement.classList.contains('players-tr-disabled')) {
-                e.target.parentElement.classList.add('players-tr-disabled');
+//                e.target.parentElement.classList.add('players-tr-disabled');
+                disableAllPlayers();
                 const playerId = event.target.parentElement.getAttribute('data-player-id');
                 console.log(playerId);
                 fetch('/api_players/receive_player_id_to_add/', { method: 'POST', headers: { 'Content-type': 'application/json' }, body: JSON.stringify(playerId), credentials: 'same-origin' })
@@ -72,6 +73,13 @@ function renderAllPlayers(data) {
                })
             }
         })
+}
+
+
+function disableAllPlayers() {
+    $('.player_row').each(function() {
+        $( this ).addClass('players-tr-disabled')
+    });
 }
 
 
@@ -179,7 +187,7 @@ function chooseCaptain(data) {
 
 function renderBudget(data) {
     const myBudget = $('#budget');
-    myBudget.html('Бюджет: ' + data.budget);
+    myBudget.html('Бюджет: ' + data.budget + ' млн');
 }
 
 
