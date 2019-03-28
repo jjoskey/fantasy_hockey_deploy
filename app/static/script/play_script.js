@@ -42,7 +42,7 @@ function renderAllPlayers(data) {
         if (!tableBody.children().length) {
             data.all_players.forEach(function(element) {
                 const tr = $(`<tr class="player_row"><td>${element.fields.surname} ${element.fields.name}</td>
-                <td class="cell_centerize">${element.fields.position}</td><td class="cell_centerize">${element.fields.price}</td>
+                <td class="cell_centerize">${element.fields.position}</td><td class="cell_centerize">${element.fields.price} млн</td>
                 <td>${element.fields.club}</td><td class="cell_centerize">${element.fields.points}</td></tr>`);
                 tr.attr('data-player-id', element.id);
                 disablation(element.disable, element.message, tr);
