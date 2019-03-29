@@ -49,15 +49,9 @@ def restore_password(request, message=None):
     if request.method == 'POST':
         form = forms.RestorePasswordForm(request.POST)
         email = form['email'].value()
-        # try:
-        #     user = User.objects.get(email=email)
-        # except:
-        #     user = False
-        #     message = 'YES'
-            # return render(request, 'accounts/restore_password.html', {'form': form, 'message': message})
+
         try:
             user = User.objects.get(email=email)
-            # print(user)
         except:
             user = False
             message = 'Пользователя с таким email нет'
@@ -72,7 +66,7 @@ def restore_password(request, message=None):
                 to=[user.email]
             )
             email.send()
-            # print(password)  # !!!прислать письмо юзеру с новым паролем
+
             user.set_password(password)
             user.save()
             return redirect('accounts:login')
@@ -82,7 +76,7 @@ def restore_password(request, message=None):
     return render(request, 'accounts/restore_password.html', {'form': form, 'message': message})
 
 
-def conditions(request): # заставляет юзера заполнить название команды, если оно пусто
+def conditions(request):  # заставляет юзера заполнить название команды, если оно пусто
     if request.user.is_authenticated():
         current_user = request.user
         current_profile = Profile.objects.get(user_id=current_user)

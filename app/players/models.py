@@ -13,7 +13,7 @@ class Tour(models.Model):
     season = models.PositiveIntegerField(blank=False, null=False, default=YEAR,
                                          help_text='Год тура')
     number = models.PositiveSmallIntegerField(
-        help_text='Номер тура. Если это матч плей-офф, номер всё равно вбивается. Он будет использован, при подсчёте очков.')
+        help_text='Номер тура. Туры идут по порядку. Если это матч плей-офф, номер всё равно вбивается. Он будет использован, при подсчёте очков.')
     name = models.CharField(max_length=64, blank=True, null=True,
                             help_text='Имя тура заполняется только во время плей-офф. Например, "1/8 финала"')
     start_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True,
@@ -30,18 +30,10 @@ class Tour(models.Model):
         unique_together = ['season', 'number']
 
 
-
-
-# @receiver(post_save, sender=Tour)
-# def add_new_tour(sender, **kwargs):
-#     obj = kwargs['instance']
-#     if obj.end_time:
-#         Tour.objects.create(number=obj.tour+1)
-
-
 class Club(models.Model):
 
-    name = models.CharField(max_length=100, blank=False, null=False)
+    name = models.CharField(max_length=100, blank=False, null=False,
+                            help_text='Введите имя клуба. Именно так оно будет отображаться везде.')
 
     def __str__(self):
         return self.name
@@ -140,12 +132,6 @@ class Team(models.Model):
     tour_number_end = models.ForeignKey(Tour, blank=True, null=True, related_name='tour_number_end') #добавить сюда ссылка на Tour Model + сделать автофилл
     is_captain = models.BooleanField(blank=False, null=False, default=False)
 
-    # def save(self, *args, **kwargs):
-    #
-    #     super(Team, self).save(*args, **kwargs) https://www.youtube.com/watch?v=pGVvG2b0oo8 если что посмотреть здесь,
-    # как переделать метод self
-
-
     def __str__(self):
         return str(self.user_id) + ' ' + str(self.player_id) + ' ' + str(self.tour_number_start) + '-' + str(self.tour_number_end)
 
@@ -218,6 +204,8 @@ class Miss_Match(models.Model):
     class Meta:
 
         unique_together = ['match_id', 'player_id']
+        verbose_name_plural = 'Miss_Matches'
+
 
 class Captain(models.Model):
 

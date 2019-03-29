@@ -21,9 +21,7 @@ DEFAULT_CHANGES_COUNT = 3
 
 @staff_member_required
 def render_freeze_and_count(request):
-    print(request.COOKIES)
-        # tour = get_current_tour()
-    # save_players_in_PTT_model(tour)
+
     return render(request, 'freeze_and_count.html')
 
 
@@ -96,13 +94,6 @@ def get_freeze_data():
 @csrf_exempt
 def send_last_freeze(request): #запускается, когда пользователь заходит на /freeze_and_count/
 
-    # players = Player.objects.all()
-    # for player in players:
-    #
-    #     player.price = player.price / 1000000
-    #     player.save()
-
-
     if request.method == 'GET':
         data_to_send = get_freeze_data()
         print(data_to_send)
@@ -125,7 +116,6 @@ def off_season(request):
                 for instance in team_instances:
                     instance.tour_number_end = current_tour
                     instance.save()
-
 
                 return HttpResponse('OK')
 
@@ -218,8 +208,7 @@ def count_points(tour):
 
 
     for event in events:
-        # if event.player_id.pk == 37:
-        #     print(event.player_id.club)
+
         if event.kind == 'Goal_Game':
 
             if event.player_id.position == 'GK':
@@ -259,8 +248,7 @@ def count_points(tour):
         else: bullitt_winner = match.bullitt_winner
 
         for instance in instances_PTT.filter(Q(club=match.home_team) | Q(club=match.guest_team)):
-            # if player.pk == 37:
-            #     print(player)
+
             goals_scored_by_players_team = score[0] if instance.club == match.home_team else score[1]
             goals_miss_by_players_team = score[1] if instance.club == match.home_team else score[0]
 
@@ -300,49 +288,6 @@ def count_points(tour):
 
             else:
                 get_or_create_key_and_plus_value(points, instance.player_id.pk, 0, '0, Miss {}'.format(match))
-
-        # for player in players.filter(Q(club=match.home_team) | Q(club=match.guest_team)):
-        #     # if player.pk == 37:
-        #     #     print(player)
-        #     goals_scored_by_players_team = score[0] if player.club == match.home_team else score[1]
-        #     goals_miss_by_players_team = score[1] if player.club == match.home_team else score[0]
-        #
-        #     if not miss_the_match(player, miss_match_instances.filter(match_id=match)):
-        #
-        #         if player.club == winner:
-        #             get_or_create_key_and_plus_value(points, player.pk, 3, '+3, team won')
-        #         elif player.club == loser:
-        #             get_or_create_key_and_plus_value(points, player.pk, -1, '-1, team lose')
-        #
-        #         if winner == None:
-        #             get_or_create_key_and_plus_value(points, player.pk, 1, '+1, draw')
-        #             if player.club == bullitt_winner:
-        #                 get_or_create_key_and_plus_value(points, player.pk, 1, '+1, bullitts won')
-        #
-        #         if goals_miss_by_players_team >= 3:
-        #             if player.position == 'GK':
-        #                 get_or_create_key_and_plus_value(points, player.pk, -3, '-3, team miss 3+ goals GK')
-        #             elif player.position == 'DE':
-        #                 get_or_create_key_and_plus_value(points, player.pk, -2, '-2, team miss 3+ goals DE')
-        #
-        #         if goals_scored_by_players_team >= 5:
-        #             if player.position == 'MF':
-        #                 get_or_create_key_and_plus_value(points, player.pk, 2, '+2, team scored 5+ goals MF')
-        #             elif player.position == 'FW':
-        #                 get_or_create_key_and_plus_value(points, player.pk, 3, '+3, team scored 5+ goals FW')
-        #
-        #         if player.club == winner and goals_miss_by_players_team == 0:
-        #             if player.position == 'GK':
-        #                 get_or_create_key_and_plus_value(points, player.pk, 5, '+5, team won and miss 0 goals GK')
-        #             elif player.position == 'DE':
-        #                 get_or_create_key_and_plus_value(points, player.pk, 3, '+3, team won and miss 0 goals DE')
-        #
-        #         if goals_scored_by_players_team == 0 and goals_miss_by_players_team == 0:
-        #             if player.position == 'GK' or player.position == 'DE':
-        #                 get_or_create_key_and_plus_value(points, player.pk, 1, '+1, 0:0 draw GK or DE')
-        #
-        #     else:
-        #         get_or_create_key_and_plus_value(points, player.pk, 0, '0, Miss {}'.format(match))
 
     return points
 
@@ -513,11 +458,3 @@ def is_first_time(user):
 def is_off_season():
     utc_now = datetime.datetime.now(datetime.timezone.utc)
     return Off_Season.objects.filter(start_time__lt=utc_now, end_time__isnull=True).exists()
-
-
-# def recount_start_tour(profile):
-#     next_tour = get_next_tour()
-#     if is_first_time(profile.user_id):
-#         for instance in Team.objects.filter(user_id=profile, tour_number_start__season=YEAR):
-#             instance.tour_number_start = next_tour
-#             instance.save()

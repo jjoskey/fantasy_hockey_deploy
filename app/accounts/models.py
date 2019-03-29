@@ -10,12 +10,6 @@ from django.core.mail import EmailMessage
 DEFAULT_BUDGET = 100
 
 
-# class User(auth.models.User, auth.models.PermissionsMixin):
-#
-#     def __str__(self):
-#         return "@{}".format(self.username)
-
-
 class Profile(models.Model):
     user_id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     team_name = models.CharField(max_length=30, null=True, blank=True, unique=True)
@@ -54,6 +48,8 @@ class AdBanners(models.Model):
     large_image = models.ImageField(upload_to='banners/', blank=False, null=False, help_text='Resolution 1140 x 90 px')
     link = models.URLField(blank=True, null=True)
 
-
+    class Meta:
+        verbose_name = 'AdBanner'
+        verbose_name_plural = 'AdBanners'
 
 

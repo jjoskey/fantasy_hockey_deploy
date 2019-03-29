@@ -53,7 +53,6 @@ def permissions(players):
         data_to_return['positions'][player.position] += 1
         data_to_return['avaliable_budget'] -= player.price
         data_to_return['avaliable_budget'] = round(data_to_return['avaliable_budget'], 1)
-        # print(player.price, data_to_return['avaliable_budget'])
         data_to_return['players_quantity'] += 1
 
     return data_to_return
@@ -63,13 +62,6 @@ def save_budget(user, budget):
     current_profile = Profile.objects.get(user_id=user)
     current_profile.budget = budget
     current_profile.save()
-
-
-# def get_players_points(player):
-#     points = 0
-#     for instance in Result_Players.objects.filter(player_id=player, tour_number__season=YEAR):
-#         points += instance.points
-#     return points
 
 
 def all_players_to_send(temporary_team):
@@ -203,8 +195,6 @@ def captain_stage(user):
                     if instance.tour_number_start != next_tour:
                         return 'freeze'
                 return 'choose_captain'
-        # if not is_captain:  #можно выбрать только когда юзер играет первый раз
-        #     return 'choose_captain'
 
     else:
         if freeze_and_count.is_first_time(user):
@@ -225,7 +215,6 @@ def get_results_of_3_last_tours(user):
     for instance in last_3_tours_result:
         dict_to_return[instance.tour_number.number] = instance.points
     return dict_to_return
-
 
 
 def collect_data(user):
@@ -363,7 +352,6 @@ def unactivate_player_in_temporary_team_if_received(player, user):
 
         instance = Team_Temporary.objects.get(user_id=current_profile, player_id=player, transfer='First_Time',
                        timeout__gt=utc_now)
-        # print(instance)
         instance.timeout = utc_now
         instance.save()
 
@@ -475,7 +463,6 @@ def get_time_of_first_player_in_temp_team(user):
 def make_player_captain(player, user):
     current_profile = Profile.objects.get(user_id=user)
     users_team = Team.objects.filter(user_id=current_profile).exclude(tour_number_end__isnull=False)
-    # current_captain = None
 
     for instance in users_team:
         if instance.is_captain:

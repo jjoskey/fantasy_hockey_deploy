@@ -10,11 +10,6 @@ class UserCreateForm(UserCreationForm):
     class Meta:
         fields = ("username", "email", "password1", "password2")
         model = get_user_model()
-        # exclude = ('email.help_text',)
-        # help_texts = {
-        #     'username': None,
-        #     'email': None
-        # }
 
     email = forms.EmailField(max_length=40)
 
@@ -68,15 +63,7 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ('team_name',)
 
-
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.fields['team_name'].label = None
-
-
-# class ChangePasswordForm(forms.ModelForm):
-#     class Meta:
-#         model = get_user_model()
-#         fileds = ('password1', 'password2',)

@@ -14,7 +14,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 SECRET_KEY = '&qxjlrmu(-m7x6kkcnu5ao_l2_q%uulp_ehwgd*6b+m-_@k-l9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '31937bc2.ngrok.io',

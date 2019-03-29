@@ -1,15 +1,6 @@
 from django.views.generic import TemplateView
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-import json
-# from players.models import Player
 from accounts.models import Profile, AdBanners
 from players.models import Team, Game
-# from players import views as players_views
-# from players.views import *
-import json
-from django.http import JsonResponse
-from django.core import serializers
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound
 from freeze_and_count import views as freeze_and_count
@@ -24,10 +15,6 @@ class LoggedinPage(TemplateView):
 
 class ThanksPage(TemplateView):
     template_name = 'thanks.html'
-
-
-# class HomePage(TemplateView):
-#     template_name = "index.html"
 
 
 def render_rules(request):
@@ -123,12 +110,6 @@ def render_user_team(request, user_id):
             team[instance.player_id.position].append(instance.player_id)
             if instance.is_captain:
                 captain = instance.player_id
-
-
-        # print(team)
-        # print(profile.user_id.username)
-        # print(profile.points)
-
 
         return render(request, 'users_team.html', context={'team': team, 'name': profile.team_name, 'points': profile.points, 'results': last_3_results, 'banners': banners, 'captain': captain})
     else:
