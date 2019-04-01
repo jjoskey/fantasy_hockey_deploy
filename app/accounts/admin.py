@@ -4,7 +4,7 @@ from .models import Profile, AdBanners
 
 class ProfileAdmin(admin.ModelAdmin):
 
-    list_display = ['user_id', 'team_name', 'budget', 'changes_count', 'points', 'pk']
+    list_display = ['user_id', 'team_name', 'budget', 'changes_count', 'points']
 
 
 class AdBannersAdmin(admin.ModelAdmin):
@@ -12,4 +12,4 @@ class AdBannersAdmin(admin.ModelAdmin):
 
 
 admin.site.register(AdBanners, AdBannersAdmin)
-# admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Profile, ProfileAdmin)

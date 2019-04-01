@@ -13,10 +13,9 @@ DEFAULT_BUDGET = 100
 class Profile(models.Model):
     user_id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     team_name = models.CharField(max_length=30, null=True, blank=True, unique=True)
-    budget = models.FloatField(default=DEFAULT_BUDGET)
-    changes_count = models.PositiveIntegerField(default=0)
-    refresh_changes = models.BooleanField(editable=False, default=False)
-    points = models.PositiveIntegerField(default=0, blank=False, null=False)
+    budget = models.FloatField(default=DEFAULT_BUDGET, editable=False)
+    changes_count = models.PositiveIntegerField(default=0, editable=False)
+    points = models.PositiveIntegerField(default=0, blank=False, null=False, editable=False)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
