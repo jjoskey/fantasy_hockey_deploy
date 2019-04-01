@@ -20,7 +20,7 @@ class Tour(models.Model):
                                       help_text='Начало дедлайна в туре.')
     supposed_end_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True,
                                              help_text='Предположительные время конца дедлайна в туре. Показывается для пользователя, когда ему ждать результатов подсчёта очков.')
-    end_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True)
+    end_time = models.DateTimeField(auto_now_add=False, auto_now=False, blank=True, null=True, editable=False)
 
     def __str__(self):
         return 'Сезон: ' + str(self.season) + ' тур: ' + str(self.number)
