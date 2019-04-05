@@ -426,11 +426,15 @@ def save_users_in_team_model(user):
                 if instance.player_id in temporary_team:
                     temporary_team.remove(instance.player_id)
                 else:
-                    instance.tour_number_end = previous_tour
-                    instance.save()
-                    unactivate_player_in_temporary_team_if_saved(instance.player_id, user)
-                    if instance.get_end_tour() < instance.get_start_tour():
+                    if previous_tour == 'Previous tour is not exist':
                         instance.delete()
+                        unactivate_player_in_temporary_team_if_saved(instance.player_id, user)
+                    else:
+                        instance.tour_number_end = previous_tour
+                        instance.save()
+                        unactivate_player_in_temporary_team_if_saved(instance.player_id, user)
+                        if instance.get_end_tour() < instance.get_start_tour():
+                            instance.delete()
 
             for player in temporary_team:
                 Team(user_id=current_profile, player_id=player, tour_number_start=current_tour).save()
