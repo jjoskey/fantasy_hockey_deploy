@@ -46,6 +46,7 @@ const countButton = $('#count_button');
 const addTransfers = $('#add_transfers');
 const offSeasonButton = $('#end_season');
 const onSeasonButton = $('#start_season');
+const bestPlayers = $('#best_players');
 
 fetchFreeze().then( data => showButton(data));
 
@@ -126,6 +127,19 @@ countButton.click(() => {
 
 //    console.log(tour);
 })
+
+
+bestPlayers.click(() => {
+
+    bestPlayers.attr('disabled', true);
+    fetch('/api_freeze_and_count/get_best_players/', { method: 'GET'})
+        .then(response => response.json())
+        .then(data =>{
+            bestPlayers.removeAttr('disabled');
+            console.log(data);
+        })
+})
+
 
 addTransfers.click(() => {
     $('#not_number_transfers').addClass('hide');

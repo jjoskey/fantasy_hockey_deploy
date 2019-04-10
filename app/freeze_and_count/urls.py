@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'count_and_save_points/$', views.count_and_save_points, name='count_and_save_points'),
     url(r'add_changes_to_all_profile/$', views.add_changes_using_data, name='add_changes_to_all_profile'),
     url(r'off_season/$', views.off_season, name='off_season'),
-    url(r'start_season/$', views.start_season, name='start_season')
+    url(r'start_season/$', views.start_season, name='start_season'),
+    url(r'get_best_players/$', views.get_best_players, name='best_players')
 ]

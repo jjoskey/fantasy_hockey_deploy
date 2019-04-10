@@ -13,6 +13,7 @@ from players.views import DEFAULT_PLAYERS_Q
 from django.db.models import Q
 from players import views
 from django.contrib.admin.views.decorators import staff_member_required
+from collections import Counter, OrderedDict
 
 
 YEAR = datetime.datetime.now().year
@@ -98,6 +99,18 @@ def send_last_freeze(request): #запускается, когда пользо�
         data_to_send = get_freeze_data()
         print(data_to_send)
         return JsonResponse(data_to_send, safe=False)
+
+
+@staff_member_required
+@csrf_exempt
+def get_best_players(request): #запускается, когда пользователь заходит на /freeze_and_count/
+
+    if request.method == 'GET':
+        counter = Counter()
+        for instance in Team.objects.filter(tour_number_end__isnull=True):
+            # print(instance.player_id.pk)
+            counter[instance.player_id.surname] += 1
+        return JsonResponse(counter.most_common(10), safe=False)
 
 
 @staff_member_required
