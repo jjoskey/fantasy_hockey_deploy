@@ -14,7 +14,7 @@ DEFAULT_CLUBS_Q = 2
 DEFAULT_PLAYERS_Q = 11
 DEFAULT_POS_Q = {'GK': [1, 'вратарь'], 'DE': [3, 'защитника'], 'MF': [4, 'полузащитника'], 'FW': [3, 'нападающих']}
 YEAR = datetime.datetime.now().year
-DELTA = datetime.timedelta(hours=10)
+DELTA = datetime.timedelta(hours=1)
 
 
 def get_users_temporary_team(user):
