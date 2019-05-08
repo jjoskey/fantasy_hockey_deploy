@@ -46,6 +46,7 @@ class TeamAdmin(admin.ModelAdmin):
 class TourAdmin(admin.ModelAdmin):
 
     list_display = ['number', 'name', 'start_time', 'supposed_end_time', 'end_time', 'season']
+    search_fields = ['user_id']
 
 
 class ResultProfilesAdmin(admin.ModelAdmin):
@@ -67,12 +68,14 @@ class MissMatchAdmin(admin.ModelAdmin):
 class TeamTemporaryAdmin(admin.ModelAdmin):
 
     list_display = ['user_id', 'player_id', 'transfer', 'timeout']
+    search_fields = ['user_id']
 
 
 class CaptainAdmin(admin.ModelAdmin):
 
     list_display = ['user_id', 'tour_number', 'player_id' ]
     list_filter = ['user_id', 'tour_number']
+    search_fields = ['user_id']
 
 
 class PTTAdmin(admin.ModelAdmin):
@@ -89,15 +92,15 @@ admin.site.register(Club, ClubAdmin)
 admin.site.register(Player, PlayerAdmin)
 admin.site.register(Game, GameAdmin)
 admin.site.register(Event, EventAdmin)
-# admin.site.register(Team, TeamAdmin)
+admin.site.register(Team, TeamAdmin)
 admin.site.register(Tour, TourAdmin)
 # admin.site.register(Result_Profiles, ResultProfilesAdmin)
 admin.site.register(Miss_Match, MissMatchAdmin)
-# admin.site.register(Result_Players, ResultPlayersAdmin)
-# admin.site.register(Team_Temporary, TeamTemporaryAdmin)
-# admin.site.register(Captain, CaptainAdmin)
-# admin.site.register(Players_Team_in_Tour, PTTAdmin)
-# admin.site.register(Off_Season, OffSeasonAdmin)
+admin.site.register(Result_Players, ResultPlayersAdmin)
+admin.site.register(Team_Temporary, TeamTemporaryAdmin)
+admin.site.register(Captain, CaptainAdmin)
+admin.site.register(Players_Team_in_Tour, PTTAdmin)
+admin.site.register(Off_Season, OffSeasonAdmin)
 
 
 admin.site.unregister(Group)
