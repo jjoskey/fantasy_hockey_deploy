@@ -15,7 +15,7 @@ class Profile(models.Model):
     team_name = models.CharField(max_length=30, null=True, blank=True, unique=True)
     budget = models.FloatField(default=DEFAULT_BUDGET, editable=False)
     changes_count = models.PositiveIntegerField(default=0)
-    points = models.PositiveIntegerField(default=0, blank=False, null=False, editable=False)
+    points = models.IntegerField(default=0, blank=False, null=False, editable=False)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
