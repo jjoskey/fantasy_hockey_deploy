@@ -364,6 +364,10 @@ def unactivate_player_in_temporary_team_if_received(player, user):
             current_profile.changes_count += 1
             current_profile.save()
         else:
+
+            if Team_Temporary.objects.filter(user_id=current_profile, player_id=player, transfer='From_Team',
+                              timeout__gt=utc_now).exists():
+                return
             Team_Temporary(user_id=current_profile, player_id=player, transfer='From_Team',
                        timeout=utc_now+DELTA if not get_time_of_first_player_in_temp_team(user) else get_time_of_first_player_in_temp_team(user)).save()
 
