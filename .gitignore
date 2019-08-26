@@ -117,3 +117,4 @@ dmypy.json
 
 app/media/
 app/db.sqlite3
+.idea
