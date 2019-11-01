@@ -3,7 +3,7 @@ django-bootstrap4==0.0.7
 django-compat==1.0.15
 django-crispy-forms==1.7.2
 ipaddress==1.0.16
-Pillow==5.4.1
+Pillow==6.2.0
 pygeoip==0.3.2
 pytz==2016.6
 six==1.12.0
